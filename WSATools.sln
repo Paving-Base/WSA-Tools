@@ -10,7 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSATools", "WSATools\WSATools.csproj", "{D8364E79-E4A4-4249-AF7D-BF4C7F500715}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WSATools", "WSATools\WSATools.csproj", "{D8364E79-E4A4-4249-AF7D-BF4C7F500715}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "WSATools.Installer", "WSATools.Installer\WSATools.Installer.vdproj", "{7E153543-6784-4B3A-A029-DA8EB4EBEFCA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,10 @@ Global
 		{D8364E79-E4A4-4249-AF7D-BF4C7F500715}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D8364E79-E4A4-4249-AF7D-BF4C7F500715}.Release|x64.ActiveCfg = Release|Any CPU
 		{D8364E79-E4A4-4249-AF7D-BF4C7F500715}.Release|x64.Build.0 = Release|Any CPU
+		{7E153543-6784-4B3A-A029-DA8EB4EBEFCA}.Debug|Any CPU.ActiveCfg = Debug
+		{7E153543-6784-4B3A-A029-DA8EB4EBEFCA}.Debug|x64.ActiveCfg = Debug
+		{7E153543-6784-4B3A-A029-DA8EB4EBEFCA}.Release|Any CPU.ActiveCfg = Release
+		{7E153543-6784-4B3A-A029-DA8EB4EBEFCA}.Release|x64.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

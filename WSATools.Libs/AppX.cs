@@ -89,7 +89,9 @@ namespace WSATools.Libs
                 foreach (var url in urls)
                 {
                     var path = Path.Combine(Environment.CurrentDirectory, url.Key);
-                    if (await Downloader.Create(url.Value, path, timeout))
+                    if (File.Exists(path))
+                        count++;
+                    else if (await Downloader.Create(url.Value, path, timeout))
                         count++;
                 }
                 return count == total;

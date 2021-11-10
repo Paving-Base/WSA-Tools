@@ -1,0 +1,81 @@
+﻿<ui:Page x:Class="WSATools.Pages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:ui="http://schemas.modernwpf.com/2019"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WSATools.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainPage">
+    <Grid>
+        <ui:NavigationView
+            PaneTitle="WSA Tools"
+            x:Name="NavigationView"
+            Loaded="NavigationView_Loaded"
+            IsTitleBarAutoPaddingEnabled="False"
+            BackRequested="NavigationView_BackRequested"
+            SelectionChanged="NavigationView_SelectionChanged">
+            <ui:NavigationView.Header>
+                <Grid
+                    Margin="0,5,0,0"
+                    x:Name="HeaderGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        x:Name="HeaderTitle"
+                        HorizontalAlignment="Left"
+                        TextTrimming="CharacterEllipsis"/>
+                    <Grid
+                        Margin="10,0"
+                        Grid.Column="1"
+                        x:Name="MessageGrid"
+                        HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid
+                            Grid.Column="0"
+                            x:Name="MessageBar">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ui:FontIcon
+                                FontSize="14"
+                                Grid.Column="0"
+                                x:Name="MessageInfo"
+                                FontFamily="Segoe MDL2 Assets"/>
+                            <TextBlock
+                                FontSize="14"
+                                Grid.Column="1"
+                                x:Name="Message"
+                                Margin="2,0,0,0"
+                                TextTrimming="CharacterEllipsis"/>
+                        </Grid>
+                        <ui:ProgressRing
+                            Width="20"
+                            Height="20"
+                            Grid.Column="1"
+                            x:Name="ProgressRing"
+                            Visibility="Collapsed"
+                            Background="Transparent"/>
+                    </Grid>
+                </Grid>
+            </ui:NavigationView.Header>
+            <ui:NavigationView.MenuItems>
+                <ui:NavigationViewItem
+                    Tag="Home"
+                    Icon="Home"
+                    Content="主页"/>
+            </ui:NavigationView.MenuItems>
+            <ui:Frame
+                x:FieldModifier="public"
+                x:Name="NavigationViewFrame"/>
+        </ui:NavigationView>
+    </Grid>
+</ui:Page>

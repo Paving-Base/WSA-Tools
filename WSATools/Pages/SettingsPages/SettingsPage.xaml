@@ -1,0 +1,65 @@
+﻿<Page x:Class="WSATools.Pages.SettingsPages.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.modernwpf.com/2019"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:controls="clr-namespace:WSATools.Controls"
+      xmlns:local="clr-namespace:WSATools.Pages.SettingsPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SettingsPage">
+    <Grid>
+        <ui:ScrollViewerEx>
+            <StackPanel Margin="16">
+                <controls:SettingsGroup
+                    Header="版本">
+                    <controls:Setting
+                        Icon="&#xE117;"
+                        Header="WSA Tools v1.0.0">
+                        <controls:Setting.Description>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Style="{StaticResource SecondaryTextStyle}">
+                                    <Run Text="Last Checked"/>
+                                    <Run Text="Never"/>
+                                </TextBlock>
+                                <StackPanel
+                                    Margin="0,2,0,0"
+                                    Orientation="Horizontal">
+                                    <ui:HyperlinkButton
+                                        Content="反馈"
+                                        Tag="FeedBack"
+                                        Margin="0,0,2,0"/>
+                                    <ui:HyperlinkButton
+                                        Margin="2,0"
+                                        Content="版本说明"
+                                        NavigateUri="https://github.com/Paving-Base/APK-Installer/releases/"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </controls:Setting.Description>
+                        <controls:Setting.ActionContent>
+                            <ui:SimpleStackPanel
+                                Spacing="18"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                                <ui:ProgressRing
+                                    Width="24"
+                                    Height="24"/>
+                                <TextBlock
+                                    FontWeight="SemiBold"
+                                    Text="正在检查更新......"
+                                    VerticalAlignment="Center"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                                <Button
+                                    x:Name="Update"
+                                    Tag="CheckUpdate"
+                                    Content="检查更新"
+                                    HorizontalAlignment="Right"/>
+                            </ui:SimpleStackPanel>
+                        </controls:Setting.ActionContent>
+                    </controls:Setting>
+                </controls:SettingsGroup>
+            </StackPanel>
+        </ui:ScrollViewerEx>
+    </Grid>
+</Page>

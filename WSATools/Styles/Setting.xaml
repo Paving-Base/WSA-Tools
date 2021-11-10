@@ -3,7 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ui="http://schemas.modernwpf.com/2019"
     xmlns:controls="clr-namespace:WSATools.Controls">
-    <Style TargetType="{x:Type controls:Setting}">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Button.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <Style TargetType="controls:Setting">
         <Setter Property="Padding" Value="16"/>
         <Setter Property="Margin" Value="0,0,0,0"/>
         <Setter Property="IsTabStop" Value="False"/>
@@ -14,7 +17,7 @@
         <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorDefaultBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:Setting}">
+                <ControlTemplate TargetType="controls:Setting">
                     <Border
                         MinHeight="48"
                         x:Name="RootGrid"
@@ -66,22 +69,22 @@
                                     FontSize="{DynamicResource SecondaryTextFontSize}"
                                     Foreground="{DynamicResource TextFillColorSecondaryBrush}">
                                     <ContentPresenter.Resources>
-                                        <!--<Style TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
+                                        <Style TargetType="TextBlock">
                                             <Style.Setters>
                                                 <Setter Property="TextWrapping" Value="Wrap"/>
                                             </Style.Setters>
-                                        </Style>-->
-                                        <!--<Style TargetType="ui:HyperlinkButton" BasedOn="{StaticResource TextButtonStyle}">
+                                        </Style>
+                                        <Style TargetType="ui:HyperlinkButton" BasedOn="{StaticResource TextButtonStyle}">
                                             <Style.Setters>
                                                 <Setter Property="FontSize" Value="12"/>
                                                 <Setter Property="Padding" Value="0,0,0,0"/>
                                             </Style.Setters>
-                                        </Style>-->
+                                        </Style>
                                     </ContentPresenter.Resources>
                                 </ui:ContentPresenterEx>
                             </StackPanel>
 
-                            <ContentPresenter
+                            <ui:ContentPresenterEx
                                 Grid.Column="2"
                                 x:Name="ContentPresenter"
                                 VerticalAlignment="Center"
@@ -113,6 +116,14 @@
                             </Border>
                         </Grid>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" TargetName="IconPresenter" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+                            <Setter Property="Foreground" TargetName="HeaderPresenter" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+                            <Setter Property="Foreground" TargetName="ContentPresenter" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+                            <Setter Property="Foreground" TargetName="DescriptionPresenter" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -30,10 +30,13 @@
                     </ui:ThemeResources.ThemeDictionaries>
                 </ui:ThemeResources>
                 <ui:XamlControlsResources/>
+                <!--  FluentWPF Controls  -->
+                <ResourceDictionary Source="pack://Application:,,,/FluentWPF;component/Styles/Controls.xaml"/>
                 <!-- Other merged dictionaries here -->
                 <ResourceDictionary Source="pack://Application:,,,/WSATools;component/Themes/SettingsUI.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
+            <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="{DynamicResource SolidBackgroundFillColorBase}"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

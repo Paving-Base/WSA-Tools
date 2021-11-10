@@ -36,6 +36,7 @@
                 <ResourceDictionary Source="pack://Application:,,,/WSATools;component/Themes/SettingsUI.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
+            <CornerRadius x:Key="ControlCornerRadius" TopLeft="4" TopRight="4" BottomRight="4" BottomLeft="4"/>
             <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="{DynamicResource SolidBackgroundFillColorBase}"/>
         </ResourceDictionary>
     </Application.Resources>

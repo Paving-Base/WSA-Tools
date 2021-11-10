@@ -36,12 +36,15 @@ namespace WSATools.Controls
     /// </summary>
     [TemplateVisualState(Name = "Normal", GroupName = "CommonStates")]
     [TemplateVisualState(Name = "Disabled", GroupName = "CommonStates")]
+    [TemplatePart(Name = RightIconPresenter, Type = typeof(Border))]
     [TemplatePart(Name = PartIconPresenter, Type = typeof(ContentPresenter))]
     [TemplatePart(Name = PartDescriptionPresenter, Type = typeof(ContentPresenter))]
     public class Setting : ContentControl
     {
         private const string PartIconPresenter = "IconPresenter";
         private const string PartDescriptionPresenter = "DescriptionPresenter";
+        private const string RightIconPresenter = "ExpandCollapseChevronBorder";
+        private Border _rightIconPresenter;
         private ContentPresenter _iconPresenter;
         private ContentPresenter _descriptionPresenter;
         private Setting _setting;
@@ -129,6 +132,7 @@ namespace WSATools.Controls
         {
             IsEnabledChanged -= Setting_IsEnabledChanged;
             _setting = (Setting)this;
+            _rightIconPresenter = (Border)_setting.GetTemplateChild(RightIconPresenter);
             _iconPresenter = (ContentPresenter)_setting.GetTemplateChild(PartIconPresenter);
             _descriptionPresenter = (ContentPresenter)_setting.GetTemplateChild(PartDescriptionPresenter);
             Update();
@@ -191,6 +195,15 @@ namespace WSATools.Controls
                 {
                     _setting._iconPresenter.Visibility = Visibility.Visible;
                 }
+            }
+
+            if(_setting.RightIcon == null)
+            {
+                _setting._rightIconPresenter.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                _setting._rightIconPresenter.Visibility = Visibility.Visible;
             }
 
             if (_setting.Description == null)

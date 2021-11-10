@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="clr-namespace:WSATools.Controls"
     xmlns:local="clr-namespace:WSATools.Pages.SettingsPages"
+    xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="800"
     Title="SettingsPage">
@@ -14,7 +15,8 @@
         <ui:ScrollViewerEx>
             <StackPanel Margin="16">
                 <controls:SettingsGroup
-                    Header="版本">
+                    Header="版本"
+                    Margin="0,-32,0,0">
                     <controls:Setting
                         Icon="&#xE117;"
                         Header="WSA Tools v1.0.0">

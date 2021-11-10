@@ -98,7 +98,6 @@
                                 CornerRadius="4"
                                 Margin="20,0,8,0"
                                 BorderThickness="2"
-                                Visibility="Collapsed"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 x:Name="ExpandCollapseChevronBorder">

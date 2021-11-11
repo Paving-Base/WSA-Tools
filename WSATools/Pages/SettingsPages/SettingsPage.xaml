@@ -7,11 +7,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
     xmlns:controls="clr-namespace:WSATools.Controls"
+    xmlns:converter="clr-namespace:WSATools.Helpers.Converter"
     xmlns:local="clr-namespace:WSATools.Pages.SettingsPages"
-    xmlns:vm="clr-namespace:WSATools.ViewModels" xmlns:converter="clr-namespace:WSATools.Helpers.Converter"
+    xmlns:vm="clr-namespace:WSATools.ViewModels"
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="800"
-    Title="SettingsPage">
+    Title="设置">
     <ui:Page.DataContext>
         <vm:SettingsViewModel x:Name="viewModel"/>
     </ui:Page.DataContext>

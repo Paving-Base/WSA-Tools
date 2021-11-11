@@ -19,6 +19,12 @@
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_C420B1A07C3B4352AD6126FA7AD8BDD3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -84,6 +90,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C420B1A07C3B4352AD6126FA7AD8BDD3"
+            {
+            "SourcePath" = "8:..\\WSATools\\logo.ico"
+            "TargetName" = "8:logo.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_ECFB738142F34CDBA9EF36EADF605582"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -140,25 +166,25 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WSA Tools"
-        "ProductCode" = "8:{6367AFCC-B817-401D-9D26-9E46F62C8E43}"
-        "PackageCode" = "8:{05C777BA-6EA4-4A82-B371-3A815CB4CB41}"
+        "ProductCode" = "8:{9FC7AB78-1DD2-4E2D-8151-093D249DA9D2}"
+        "PackageCode" = "8:{13673F48-D4FD-4B71-ADB9-C3B6FD53BD03}"
         "UpgradeCode" = "8:{2F048DFC-E0D2-4FD8-993A-FEC9C4963F2E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:0.0.1"
         "Manufacturer" = "8:wherewhere"
         "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:"
+        "ARPHELPLINK" = "8:https://github.com/Paving-Base/WSA-Tools/issues"
         "Title" = "8:WSATools.Installer"
         "Subject" = "8:"
         "ARPCONTACT" = "8:wherewhere"
-        "Keywords" = "8:"
-        "ARPCOMMENTS" = "8:"
-        "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:"
+        "Keywords" = "8:WSA; Tools"
+        "ARPCOMMENTS" = "8:一个基于 Modern WPF 的 WSA 管理工具"
+        "ARPURLINFOABOUT" = "8:https://github.com/Paving-Base/WSA-Tools"
+        "ARPPRODUCTICON" = "8:_C420B1A07C3B4352AD6126FA7AD8BDD3"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -272,7 +298,7 @@
             "Target" = "8:_6F5B09AE5B5E40ACB5E3362265D6F10B"
             "Folder" = "8:_1A5290C2B49147BDB2557594F4272451"
             "WorkingFolder" = "8:_ECFB738142F34CDBA9EF36EADF605582"
-            "Icon" = "8:"
+            "Icon" = "8:_C420B1A07C3B4352AD6126FA7AD8BDD3"
             "Feature" = "8:"
             }
         }

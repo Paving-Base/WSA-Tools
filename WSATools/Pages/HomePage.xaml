@@ -12,7 +12,7 @@
     d:DataContext="{d:DesignInstance Type=vm:HomeViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="450" d:DesignWidth="800"
-    Title="HomePage">
+    Title="主页">
     <ui:Page.DataContext>
         <vm:HomeViewModel x:Name="viewModel"/>
     </ui:Page.DataContext>

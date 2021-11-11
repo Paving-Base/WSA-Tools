@@ -5,9 +5,29 @@
     <TargetFramework>net6.0-windows10.0.20348.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+	<Authors>wherewhere</Authors>
+	<VersionPrefix>0.0.1</VersionPrefix>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <UseWindowsForms>True</UseWindowsForms>
+    <PackageProjectUrl>https://github.com/Paving-Base/WSA-Tools</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Paving-Base/WSA-Tools</RepositoryUrl>
+    <Description>一个基于 Modern WPF 的 WSA 管理工具</Description>
+    <Copyright>Copyright © 2017 - 2021 Paving Base. All Rights Reserved</Copyright>
+    <PackageTags>WSA; Tools</PackageTags>
+    <PackageIcon>Logo.png</PackageIcon>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="logo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentWPF" Version="0.9.0" />

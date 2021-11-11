@@ -9,7 +9,7 @@
     xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
     xmlns:local="clr-namespace:WSATools.Pages"
     mc:Ignorable="d" 
-    d:DesignHeight="450" d:DesignWidth="800" Title="MainPage">
+    d:DesignHeight="450" d:DesignWidth="800" Title="WSA Tools">
     <Grid>
         <ui:NavigationView
             PaneTitle="WSA Tools"

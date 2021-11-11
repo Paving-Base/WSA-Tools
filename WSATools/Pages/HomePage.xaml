@@ -28,6 +28,25 @@
                     Header="概览"
                     Margin="0,-32,0,0">
                     <controls:Setting
+                        x:Name="InfoBar"
+                        Header="你需要管理员权限身份运行来使用此应用"
+                        Background="{DynamicResource SystemFillColorCautionBackgroundBrush}">
+                        <controls:Setting.Icon>
+                            <Grid Margin="2">
+                                <ui:FontIcon
+                                    FontSize="16"
+                                    Glyph="&#xF136;"
+                                    FontFamily="{DynamicResource SymbolThemeFontFamily}"
+                                    Foreground="{DynamicResource SystemFillColorCautionBrush}"/>
+                                <ui:FontIcon
+                                    FontSize="16"
+                                    Glyph="&#xF13C;"
+                                    FontFamily="{DynamicResource SymbolThemeFontFamily}"
+                                    Foreground="{DynamicResource TextFillColorInverseBrush}"/>
+                            </Grid>
+                        </controls:Setting.Icon>
+                    </controls:Setting>
+                    <controls:Setting
                         Icon="&#xE7B5;"
                         Header="WSA 运行状态"
                         Description="{Binding WSARunState}">

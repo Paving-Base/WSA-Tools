@@ -1,5 +1,6 @@
 ﻿using SourceChord.FluentWPF;
 using System.Windows;
+using WSATools.Helpers;
 using WSATools.Pages;
 
 namespace WSATools
@@ -12,6 +13,7 @@ namespace WSATools
         public MainWindow()
         {
             InitializeComponent();
+            UIHelper.MainWindow = this;
             MainPage MainPage = new();
             Content = MainPage;
         }

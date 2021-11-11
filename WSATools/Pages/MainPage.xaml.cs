@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Navigation;
+using WSATools.Helpers;
 using WSATools.Pages.SettingsPages;
 
 namespace WSATools.Pages
@@ -22,6 +24,7 @@ namespace WSATools.Pages
         public MainPage()
         {
             InitializeComponent();
+            UIHelper.MainPage = this;
         }
 
         private void NavigationView_Loaded(object sender, RoutedEventArgs e)
@@ -121,5 +124,79 @@ namespace WSATools.Pages
                 HeaderTitle.Text = (((NavigationViewItem)NavigationView.SelectedItem)?.Content?.ToString());
             }
         }
+
+        #region 状态栏
+        public enum MessageColor
+        {
+            Red,
+            Blue,
+            Green,
+            Yellow,
+        }
+
+        public void ShowProgressRing()
+        {
+            ProgressRing.Visibility = Visibility.Visible;
+            ProgressRing.IsActive = true;
+        }
+
+        public void HideProgressRing()
+        {
+            ProgressRing.IsActive = false;
+            ProgressRing.Visibility = Visibility.Collapsed;
+        }
+
+        public void ShowProgressBar()
+        {
+            ProgressBar.Visibility = Visibility.Visible;
+            ProgressBar.IsIndeterminate = true;
+            ProgressBar.ShowError = false;
+            ProgressBar.ShowPaused = false;
+        }
+
+        public void PausedProgressBar()
+        {
+            ProgressBar.Visibility = Visibility.Visible;
+            ProgressBar.IsIndeterminate = true;
+            ProgressBar.ShowError = false;
+            ProgressBar.ShowPaused = true;
+        }
+
+        public void ErrorProgressBar()
+        {
+            ProgressBar.Visibility = Visibility.Visible;
+            ProgressBar.IsIndeterminate = true;
+            ProgressBar.ShowPaused = false;
+            ProgressBar.ShowError = true;
+        }
+
+        public void HideProgressBar()
+        {
+            ProgressBar.Visibility = Visibility.Collapsed;
+            ProgressBar.IsIndeterminate = false;
+            ProgressBar.ShowError = false;
+            ProgressBar.ShowPaused = false;
+        }
+
+        public void ShowMessage(string message, string info, MessageColor color)
+        {
+            Message.Text = message;
+            MessageInfo.Glyph = info;
+            MessageInfo.Foreground = color switch
+            {
+                MessageColor.Red => new SolidColorBrush(Color.FromArgb(255, 245, 88, 98)),
+                MessageColor.Blue => new SolidColorBrush(Color.FromArgb(255, 119, 220, 255)),
+                MessageColor.Green => new SolidColorBrush(Color.FromArgb(255, 155, 230, 155)),
+                MessageColor.Yellow => new SolidColorBrush(Color.FromArgb(255, 254, 228, 160)),
+                _ => new SolidColorBrush(Colors.Yellow),
+            };
+            MessageBar.Visibility = Visibility.Visible;
+        }
+
+        public void HideMessage()
+        {
+            MessageBar.Visibility = Visibility.Collapsed;
+        }
+        #endregion
     }
 }

@@ -15,7 +15,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_5AC82FC62D74406FB4B06A39D08CD927"
+        "MsmKey" = "8:_6F5B09AE5B5E40ACB5E3362265D6F10B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -141,11 +141,11 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WSA Tools"
         "ProductCode" = "8:{6367AFCC-B817-401D-9D26-9E46F62C8E43}"
-        "PackageCode" = "8:{47E25181-177F-4177-87C9-DE3CA30041A1}"
+        "PackageCode" = "8:{05C777BA-6EA4-4A82-B371-3A815CB4CB41}"
         "UpgradeCode" = "8:{2F048DFC-E0D2-4FD8-993A-FEC9C4963F2E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:TRUE"
+        "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
@@ -261,7 +261,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_75689EAE46FA448F831A1614FB88F15D"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_EC0CD863EB8043459BCCCC59488EA684"
             {
             "Name" = "8:WSA Tools"
             "Arguments" = "8:"
@@ -269,7 +269,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_5AC82FC62D74406FB4B06A39D08CD927"
+            "Target" = "8:_6F5B09AE5B5E40ACB5E3362265D6F10B"
             "Folder" = "8:_1A5290C2B49147BDB2557594F4272451"
             "WorkingFolder" = "8:_ECFB738142F34CDBA9EF36EADF605582"
             "Icon" = "8:"
@@ -674,7 +674,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_5AC82FC62D74406FB4B06A39D08CD927"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_6F5B09AE5B5E40ACB5E3362265D6F10B"
             {
             "SourcePath" = "8:..\\WSATools\\obj\\Debug\\net6.0-windows10.0.20348.0\\apphost.exe"
             "TargetName" = "8:"

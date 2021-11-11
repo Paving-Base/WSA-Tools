@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,7 +22,7 @@ namespace WSATools.Pages
     /// </summary>
     public partial class HomePage : ModernWpf.Controls.Page
     {
-        HomeViewModel ViewModel;
+        private HomeViewModel ViewModel;
 
         public HomePage()
         {
@@ -35,6 +36,10 @@ namespace WSATools.Pages
             {
                 ViewModel = viewModel;
             }
+            //获得当前登录的Windows用户标示
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            InfoBar.Visibility = principal.IsInRole(WindowsBuiltInRole.Administrator) ? Visibility.Collapsed : Visibility.Visible;
         }
     }
 }

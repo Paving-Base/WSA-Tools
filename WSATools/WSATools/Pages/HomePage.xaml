@@ -1,0 +1,86 @@
+﻿<ui:Page
+    x:Class="WSATools.Pages.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:WSATools.Controls"
+    xmlns:local="clr-namespace:WSATools.Pages"
+    xmlns:vm="clr-namespace:WSATools.ViewModels"
+    d:DataContext="{d:DesignInstance Type=vm:HomeViewModel}"
+    mc:Ignorable="d"
+    d:DesignHeight="450" d:DesignWidth="800"
+    Title="主页">
+    <ui:Page.DataContext>
+        <vm:HomeViewModel x:Name="viewModel"/>
+    </ui:Page.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:CallMethodAction MethodName="LoadAsync" TargetObject="{Binding}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <ui:ScrollViewerEx>
+            <StackPanel Margin="16">
+                <controls:SettingsGroup
+                    Header="概览"
+                    Margin="0,-32,0,0">
+                    <controls:Setting
+                        x:Name="InfoBar"
+                        Header="你需要管理员权限身份运行来使用此应用"
+                        Background="{DynamicResource SystemFillColorCautionBackgroundBrush}">
+                        <controls:Setting.Icon>
+                            <Grid Margin="2">
+                                <ui:FontIcon
+                                    FontSize="16"
+                                    Glyph="&#xF136;"
+                                    FontFamily="{DynamicResource SymbolThemeFontFamily}"
+                                    Foreground="{DynamicResource SystemFillColorCautionBrush}"/>
+                                <ui:FontIcon
+                                    FontSize="16"
+                                    Glyph="&#xF13C;"
+                                    FontFamily="{DynamicResource SymbolThemeFontFamily}"
+                                    Foreground="{DynamicResource TextFillColorInverseBrush}"/>
+                            </Grid>
+                        </controls:Setting.Icon>
+                    </controls:Setting>
+                    <controls:Setting
+                        Icon="&#xE7B5;"
+                        Header="WSA 运行状态"
+                        Description="{Binding WSARunState}">
+                        <controls:Setting.ActionContent>
+                            <Button
+                                Content="启动"
+                                Visibility="{Binding WSAStart}"
+                                Command="{Binding StartWSACommand}"/>
+                        </controls:Setting.ActionContent>
+                    </controls:Setting>
+                    <controls:Setting
+                        Icon="&#xE7B8;"
+                        Header="WSA 安装状态"
+                        Description="{Binding WSAState}">
+                        <controls:Setting.ActionContent>
+                            <Button
+                                Content="安装"
+                                IsEnabled="{Binding WSAEnable}"
+                                Command="{Binding InstallWSACommand}"/>
+                        </controls:Setting.ActionContent>
+                    </controls:Setting>
+                    <controls:Setting
+                        Icon="&#xE835;"
+                        Header="依赖安装状态"
+                        Description="{Binding VMState}">
+                        <controls:Setting.ActionContent>
+                            <Button
+                                Content="安装"
+                                IsEnabled="{Binding VMEnable}"
+                                Command="{Binding InstallVmCommand}"/>
+                        </controls:Setting.ActionContent>
+                    </controls:Setting>
+                </controls:SettingsGroup>
+            </StackPanel>
+        </ui:ScrollViewerEx>
+    </Grid>
+</ui:Page>

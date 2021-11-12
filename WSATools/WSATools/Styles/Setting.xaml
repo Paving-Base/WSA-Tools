@@ -1,0 +1,130 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
+    xmlns:controls="clr-namespace:WSATools.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Button.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <Style TargetType="controls:Setting">
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="Margin" Value="0,0,0,0"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="BorderThickness" Value="{DynamicResource CardBorderThickness}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorDefaultBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:Setting">
+                    <Border
+                        MinHeight="48"
+                        x:Name="RootGrid"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Stretch"
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{DynamicResource ControlCornerRadius}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <!-- Icon -->
+                                <ColumnDefinition Width="*"/>
+                                <!-- Header and subtitle -->
+                                <ColumnDefinition Width="Auto"/>
+                                <!-- Action control -->
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <ui:ContentPresenterEx
+                                MaxWidth="26"
+                                FontSize="20"
+                                Margin="2,0,18,0"
+                                x:Name="IconPresenter"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Content="{TemplateBinding Icon}"
+                                ui:FontFamily="{DynamicResource SymbolThemeFontFamily}"
+                                ui:Foreground="{DynamicResource CardPrimaryForegroundBrush}"/>
+
+                            <StackPanel
+                                Grid.Column="1"
+                                Margin="0,0,16,0"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Stretch">
+
+                                <TextBlock
+                                    x:Name="HeaderPresenter"
+                                    VerticalAlignment="Center"
+                                    Text="{TemplateBinding Header}"
+                                    Foreground="{DynamicResource CardPrimaryForegroundBrush}" />
+
+                                <ui:ContentPresenterEx
+                                    TextWrapping="Wrap"
+                                    x:Name="DescriptionPresenter"
+                                    Content="{TemplateBinding Description}"
+                                    FontSize="{DynamicResource SecondaryTextFontSize}"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}">
+                                    <ContentPresenter.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Setters>
+                                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                            </Style.Setters>
+                                        </Style>
+                                        <Style TargetType="ui:HyperlinkButton" BasedOn="{StaticResource TextButtonStyle}">
+                                            <Style.Setters>
+                                                <Setter Property="FontSize" Value="12"/>
+                                                <Setter Property="Padding" Value="0,0,0,0"/>
+                                            </Style.Setters>
+                                        </Style>
+                                    </ContentPresenter.Resources>
+                                </ui:ContentPresenterEx>
+                            </StackPanel>
+
+                            <ui:ContentPresenterEx
+                                Grid.Column="2"
+                                x:Name="ContentPresenter"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                Content="{TemplateBinding ActionContent}"/>
+
+                            <Border
+                                Width="32"
+                                Height="32"
+                                Grid.Column="3"
+                                CornerRadius="4"
+                                Margin="20,0,8,0"
+                                BorderThickness="2"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                x:Name="ExpandCollapseChevronBorder">
+                                <ui:FontIcon
+                                    Width="12"
+                                    Height="12"
+                                    FontSize="12"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    x:Name="ExpandCollapseChevron"
+                                    RenderTransformOrigin="0.5, 0.5"
+                                    Glyph="{TemplateBinding RightIcon}"
+                                    FontFamily="{DynamicResource SymbolThemeFontFamily}">
+                                </ui:FontIcon>
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" TargetName="IconPresenter" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+                            <Setter Property="Foreground" TargetName="HeaderPresenter" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+                            <Setter Property="Foreground" TargetName="ContentPresenter" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+                            <Setter Property="Foreground" TargetName="DescriptionPresenter" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WSATools": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

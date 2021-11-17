@@ -1,4 +1,4 @@
-<img alt="APK Installer LOGO" src="https://raw.githubusercontent.com/Paving-Base/WSA-Tools/main/logo.png" width="200px"/>
+<img alt="APK Installer LOGO" src="https://raw.githubusercontent.com/Paving-Base/WSA-Tools/master/logo.png" width="200px"/>
 
 # APK Installer
 一个基于 Modern WPF 的 WSA 工具箱

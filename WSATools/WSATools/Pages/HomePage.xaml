@@ -50,6 +50,22 @@
                             </StackPanel>
                         </controls:Setting.Description>
                     </controls:Setting>
+                    <Expander
+                        Style="{DynamicResource SettingExpanderStyle}">
+                        <Expander.Header>
+                            <controls:Setting
+                                Icon="&#xE7B8;"
+                                Header="WSA 状态"
+                                Style="{DynamicResource ExpanderHeaderSettingStyle}">
+                                
+                            </controls:Setting>
+                        </Expander.Header>
+                        <controls:Setting
+                            Header="1234455"
+                            Style="{DynamicResource ExpanderContentSettingStyle}">
+                            
+                        </controls:Setting>
+                    </Expander>
                 </controls:SettingsGroup>
             </StackPanel>
         </ui:ScrollViewerEx>

@@ -1,4 +1,5 @@
-﻿using APPXManager.Receivers;
+﻿using APPXManager.Exceptions;
+using APPXManager.Receivers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +11,33 @@ namespace APPXManager.Helpers
 {
     public static class CommandHelper
     {
-        public static async Task ExecuteRemoteCommandAsync(string command, IShellOutputReceiver receiver, CancellationToken cancellationToken)
+        /// <summary>
+        /// Executes a shell command on the remote device
+        /// </summary>
+        /// </param>
+        /// <param name="command">The command to execute</param>
+        /// <param name="rcvr">The shell output receiver</param>
+        public static void ExecuteShellCommand(string command, IShellOutputReceiver rcvr)
+        {
+            try
+            {
+                ExecuteShellCommandAsync(command, rcvr, CancellationToken.None).Wait();
+            }
+            catch (AggregateException ex)
+            {
+                if (ex.InnerExceptions.Count == 1)
+                {
+                    throw ex.InnerException;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public static async Task ExecuteShellCommandAsync(string command, IShellOutputReceiver receiver, CancellationToken cancellationToken)
         {
             var start = new ProcessStartInfo
             {
@@ -47,6 +74,16 @@ namespace APPXManager.Helpers
                             receiver.AddOutput(line);
                         }
                     }
+                }
+            }
+            catch (Exception e)
+            {
+                // If a cancellation was requested, this main loop is interrupted with an exception
+                // because the socket is closed. In that case, we don't need to throw a ShellCommandUnresponsiveException.
+                // In all other cases, something went wrong, and we want to report it to the user.
+                if (!cancellationToken.IsCancellationRequested)
+                {
+                    throw new ShellCommandUnresponsiveException(e);
                 }
             }
             finally

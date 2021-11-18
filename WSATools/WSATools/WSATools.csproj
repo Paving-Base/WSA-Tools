@@ -14,7 +14,7 @@
     <Description>一个基于 Modern WPF 的 WSA 管理工具</Description>
     <Copyright>Copyright © 2017 - 2021 Paving Base. All Rights Reserved</Copyright>
     <PackageTags>WSA; Tools</PackageTags>
-    <PackageIcon>Logo.png</PackageIcon>
+    <PackageIcon>logo.png</PackageIcon>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\Logo.png">
+    <None Include="..\..\logo.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>

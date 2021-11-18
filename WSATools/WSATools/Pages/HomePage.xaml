@@ -16,11 +16,6 @@
     <ui:Page.DataContext>
         <vm:HomeViewModel x:Name="viewModel"/>
     </ui:Page.DataContext>
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:CallMethodAction MethodName="LoadAsync" TargetObject="{Binding}" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
     <Grid>
         <ui:ScrollViewerEx>
             <StackPanel Margin="16">
@@ -47,37 +42,13 @@
                         </controls:Setting.Icon>
                     </controls:Setting>
                     <controls:Setting
-                        Icon="&#xE7B5;"
-                        Header="WSA 运行状态"
-                        Description="{Binding WSARunState}">
-                        <controls:Setting.ActionContent>
-                            <Button
-                                Content="启动"
-                                Visibility="{Binding WSAStart}"
-                                Command="{Binding StartWSACommand}"/>
-                        </controls:Setting.ActionContent>
-                    </controls:Setting>
-                    <controls:Setting
                         Icon="&#xE7B8;"
-                        Header="WSA 安装状态"
-                        Description="{Binding WSAState}">
-                        <controls:Setting.ActionContent>
-                            <Button
-                                Content="安装"
-                                IsEnabled="{Binding WSAEnable}"
-                                Command="{Binding InstallWSACommand}"/>
-                        </controls:Setting.ActionContent>
-                    </controls:Setting>
-                    <controls:Setting
-                        Icon="&#xE835;"
-                        Header="依赖安装状态"
-                        Description="{Binding VMState}">
-                        <controls:Setting.ActionContent>
-                            <Button
-                                Content="安装"
-                                IsEnabled="{Binding VMEnable}"
-                                Command="{Binding InstallVmCommand}"/>
-                        </controls:Setting.ActionContent>
+                        Header="WSA 状态">
+                        <controls:Setting.Description>
+                            <StackPanel>
+                                <TextBlock Text="{Binding WSAInfo.Version}"/>
+                            </StackPanel>
+                        </controls:Setting.Description>
                     </controls:Setting>
                 </controls:SettingsGroup>
             </StackPanel>

@@ -49,7 +49,7 @@ namespace APPXManager.Receivers
         /// <param name="line">
         /// The line to add to the output.
         /// </param>
-        public void AddOutput(string line)
+        public virtual void AddOutput(string line)
         {
             this.Lines.Add(line);
         }

@@ -20,13 +20,11 @@ namespace WSATools.Core.Helpers
             }
         }
 
-        private const string StartCMD = @"explorer.exe shell:appsFolder\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!App";
-
         public static (bool, PackageInfo) GetWSAInfo() => PackageManager.FindPackageByName("MicrosoftCorporationII.WindowsSubsystemForAndroid");
 
         public static void StartWSA()
         {
-            Command.Instance.Excute(StartCMD, out _);
+            PackageManager.LaunchPackage("MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe");
             while (IsWSARunning) ;
         }
 

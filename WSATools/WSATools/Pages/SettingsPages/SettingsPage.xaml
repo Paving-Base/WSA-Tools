@@ -142,6 +142,18 @@
                         </controls:Setting.Icon>
                     </controls:Setting>
                 </controls:SettingsGroup>
+                <controls:SettingsGroup
+                    Header="其他">
+                    <Button
+                        Command="{Binding GotoTestPageCommand}"
+                        Style="{DynamicResource SettingButtonStyle}">
+                        <controls:Setting
+                            Icon="&#xEC7A;"
+                            Header="前往测试页面"
+                            Style="{DynamicResource ButtonContentSettingStyle}">
+                        </controls:Setting>
+                    </Button>
+                </controls:SettingsGroup>
             </StackPanel>
         </ui:ScrollViewerEx>
     </Grid>

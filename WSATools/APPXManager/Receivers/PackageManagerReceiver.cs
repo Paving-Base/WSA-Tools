@@ -105,7 +105,7 @@ namespace APPXManager.Receivers
                             Info.PackageFullName = parts[1].Trim();
                             break;
                         case "InstallLocation":
-                            Info.InstallLocation = parts[1].Trim();
+                            Info.InstallLocation = $"{parts[1].Trim()}:{parts[2].Trim()}";
                             break;
                         case "PackageFamilyName":
                             Info.PackageFamilyName = parts[1].Trim();

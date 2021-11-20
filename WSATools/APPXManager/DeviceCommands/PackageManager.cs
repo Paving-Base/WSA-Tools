@@ -44,5 +44,16 @@ namespace APPXManager.DeviceCommands
             if (pmr.Packages.Count <= 0) { return (false, new PackageInfo()); }
             else { return (true, pmr.Packages.First()); }
         }
+
+        /// <summary>
+        /// Launch Applicaton.
+        /// </summary>
+        /// <param name="packagename">Package Family Name</param>
+        /// <param name="appname">Application ID</param>
+        public static void LaunchPackage(string packagename,string appname = "App")
+        {
+            ConsoleOutputReceiver receiver = new ConsoleOutputReceiver();
+            CommandHelper.ExecuteShellCommand($@"explorer.exe shell:appsFolder\{packagename}!{appname}", receiver);
+        }
     }
 }

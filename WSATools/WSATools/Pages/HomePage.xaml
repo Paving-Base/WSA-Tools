@@ -7,6 +7,7 @@
     xmlns:ui="http://schemas.modernwpf.com/2019"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="clr-namespace:WSATools.Controls"
+    xmlns:converter="clr-namespace:WSATools.Helpers.Converter"
     xmlns:local="clr-namespace:WSATools.Pages"
     xmlns:vm="clr-namespace:WSATools.ViewModels"
     d:DataContext="{d:DesignInstance Type=vm:HomeViewModel}"
@@ -16,6 +17,9 @@
     <ui:Page.DataContext>
         <vm:HomeViewModel x:Name="viewModel"/>
     </ui:Page.DataContext>
+    <ui:Page.Resources>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </ui:Page.Resources>
     <Grid>
         <ui:ScrollViewerEx>
             <StackPanel Margin="16">
@@ -41,30 +45,95 @@
                             </Grid>
                         </controls:Setting.Icon>
                     </controls:Setting>
-                    <controls:Setting
-                        Icon="&#xE7B8;"
-                        Header="WSA 状态">
-                        <controls:Setting.Description>
-                            <StackPanel>
-                                <TextBlock Text="{Binding WSAInfo.Version}"/>
-                            </StackPanel>
-                        </controls:Setting.Description>
-                    </controls:Setting>
                     <Expander
                         Style="{DynamicResource SettingExpanderStyle}">
                         <Expander.Header>
                             <controls:Setting
                                 Icon="&#xE7B8;"
-                                Header="WSA 状态"
+                                Header="Android 子系统信息"
+                                Description="有关您安装的 适用于 Android™ 的 Windows 子系统 的信息"
                                 Style="{DynamicResource ExpanderHeaderSettingStyle}">
-                                
+                                <controls:Setting.ActionContent>
+                                    <Button
+                                        Content="启动子系统"
+                                        Visibility="{Binding IsWSAStart, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter='true'}"/>
+                                </controls:Setting.ActionContent>
                             </controls:Setting>
                         </Expander.Header>
-                        <controls:Setting
-                            Header="1234455"
-                            Style="{DynamicResource ExpanderContentSettingStyle}">
-                            
-                        </controls:Setting>
+                        <Grid Margin="56,16,16,16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                Text="构架"
+                                Grid.Row="0"
+                                Opacity="0.75"
+                                Grid.Column="0"
+                                Padding="0,0,0,8"/>
+                            <TextBlock
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Padding="32,0,0,8"
+                                TextTrimming="CharacterEllipsis"
+                                Text="{Binding WSAInfo.Architecture}"/>
+                            <TextBlock
+                                Text="来源"
+                                Grid.Row="1"
+                                Opacity="0.75"
+                                Grid.Column="0"
+                                Padding="0,0,0,8"/>
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Padding="32,0,0,8"
+                                TextTrimming="CharacterEllipsis"
+                                Text="{Binding WSAInfo.SignatureKind}"/>
+                            <TextBlock
+                                Text="版本号"
+                                Grid.Row="2"
+                                Opacity="0.75"
+                                Grid.Column="0"
+                                Padding="0,0,0,8"/>
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Padding="32,0,0,8"
+                                Text="{Binding WSAInfo.Version}"
+                                TextTrimming="CharacterEllipsis"/>
+                            <TextBlock
+                                Grid.Row="3"
+                                Text="是否运行"
+                                Opacity="0.75"
+                                Grid.Column="0"
+                                Padding="0,0,0,8"/>
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Padding="32,0,0,8"
+                                Text="{Binding IsWSAStart}"
+                                TextTrimming="CharacterEllipsis"/>
+                            <TextBlock
+                                Grid.Row="4"
+                                Text="安装目录"
+                                Opacity="0.75"
+                                Grid.Column="0"
+                                Padding="0,0,0,8"/>
+                            <TextBlock
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                Padding="32,0,0,8"
+                                TextTrimming="CharacterEllipsis"
+                                Text="{Binding WSAInfo.InstallLocation}"/>
+                        </Grid>
                     </Expander>
                 </controls:SettingsGroup>
             </StackPanel>

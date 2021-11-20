@@ -7,7 +7,10 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.System;
+using WSATools.Helpers;
 using WSATools.Models;
+using WSATools.Pages.SettingsPages;
+using WSATools.Properties;
 
 namespace WSATools.ViewModels
 {
@@ -15,12 +18,19 @@ namespace WSATools.ViewModels
     {
         public IAsyncRelayCommand GotoUpdateCommand { get; }
         public IAsyncRelayCommand CheackUpdateCommand { get; }
+        public IAsyncRelayCommand GotoTestPageCommand { get; }
 
-        private DateTime _updateDate = new DateTime();
+        private DateTime _updateDate = Settings.Default.UpdateDate;
         public DateTime UpdateDate
         {
             get => _updateDate;
-            set => SetProperty(ref _updateDate, value);
+            set
+            {
+                Settings.Default.UpdateDate = value;
+                Settings.Default.Save();
+                value = Settings.Default.UpdateDate;
+                SetProperty(ref _updateDate, value);
+            }
         }
 
         private UpdateInfo _updateInfo = new UpdateInfo();
@@ -48,7 +58,7 @@ namespace WSATools.ViewModels
         {
             get
             {
-                string ver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                string ver = $"{Assembly.GetExecutingAssembly().GetName().Version.Build}.{Assembly.GetExecutingAssembly().GetName().Version.Major}.{Assembly.GetExecutingAssembly().GetName().Version.Minor}";
                 string name = "WSA Tools";
                 return $"{name} v{ver}";
             }
@@ -58,6 +68,7 @@ namespace WSATools.ViewModels
         {
             GotoUpdateCommand = new AsyncRelayCommand(GotoUpdate);
             CheackUpdateCommand = new AsyncRelayCommand(CheckUpdate);
+            GotoTestPageCommand = new AsyncRelayCommand(GotoTestPage);
             if (UpdateDate == DateTime.MinValue) { _ = CheckUpdate(); }
         }
 
@@ -85,9 +96,8 @@ namespace WSATools.ViewModels
             CheckingUpdate = false;
         }
 
-        private async Task GotoUpdate()
-        {
-            _ = Launcher.LaunchUriAsync(new Uri(UpdateInfo.ReleaseUrl));
-        }
+        private async Task GotoTestPage() => UIHelper.Navigate(typeof(TestPage));
+
+        private async Task GotoUpdate() => _ = Launcher.LaunchUriAsync(new Uri(UpdateInfo.ReleaseUrl));
     }
 }

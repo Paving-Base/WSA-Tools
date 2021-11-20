@@ -14,7 +14,7 @@
     <Style x:Key="ExpanderHeaderSettingStyle" TargetType="controls:Setting">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="0,14,0,14"/>
+        <Setter Property="Padding" Value="0,15,0,15"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -71,7 +71,7 @@
                                 Height="32"
                                 Grid.Column="1"
                                 CornerRadius="4"
-                                Margin="20,0,8,0"
+                                Margin="20,0,23,0"
                                 BorderThickness="2"
                                 Background="Transparent"
                                 BorderBrush="Transparent"

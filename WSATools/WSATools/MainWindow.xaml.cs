@@ -1,5 +1,4 @@
-﻿using SourceChord.FluentWPF;
-using System.Windows;
+﻿using System.Windows;
 using WSATools.Helpers;
 using WSATools.Pages;
 

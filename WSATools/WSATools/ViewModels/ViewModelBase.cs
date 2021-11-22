@@ -1,6 +1,5 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
-using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -25,7 +24,7 @@ namespace WSATools.ViewModels
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     Loading?.Invoke(this, value);
-                    if(value == Visibility.Visible)
+                    if (value == Visibility.Visible)
                     {
                         UIHelper.ShowProgressBar();
                     }

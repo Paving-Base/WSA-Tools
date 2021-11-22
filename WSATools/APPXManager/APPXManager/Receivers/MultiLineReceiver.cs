@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace APPXManager.Receivers
+﻿namespace APPXManager.Receivers
 {
     /// <summary>
     ///
@@ -16,7 +10,7 @@ namespace APPXManager.Receivers
         /// </summary>
         public MultiLineReceiver()
         {
-            this.Lines = new List<string>();
+            Lines = new List<string>();
         }
 
         /// <summary>
@@ -51,7 +45,7 @@ namespace APPXManager.Receivers
         /// </param>
         public virtual void AddOutput(string line)
         {
-            this.Lines.Add(line);
+            Lines.Add(line);
         }
 
         /// <summary>
@@ -59,14 +53,14 @@ namespace APPXManager.Receivers
         /// </summary>
         public void Flush()
         {
-            if (this.Lines.Count > 0)
+            if (Lines.Count > 0)
             {
                 // send it for final processing
-                this.ProcessNewLines(this.Lines);
-                this.Lines.Clear();
+                ProcessNewLines(Lines);
+                Lines.Clear();
             }
 
-            this.Done();
+            Done();
         }
 
         /// <summary>

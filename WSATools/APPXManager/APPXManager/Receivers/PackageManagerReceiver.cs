@@ -1,11 +1,5 @@
-﻿using APPXManager.DeviceCommands;
-using APPXManager.Models;
-using System;
-using System.Collections.Generic;
+﻿using APPXManager.Models;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APPXManager.Receivers
 {

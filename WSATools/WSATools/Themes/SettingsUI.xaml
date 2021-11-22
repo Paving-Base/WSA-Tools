@@ -3,10 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:s="clr-namespace:System;assembly=mscorlib">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://Application:,,,/WSATools;component/Styles/Button.xaml"/>
-        <ResourceDictionary Source="pack://Application:,,,/WSATools;component/Styles/TextBlock.xaml"/>
-        <ResourceDictionary Source="pack://Application:,,,/WSATools;component/Styles/SettingButton.xaml"/>
-        <ResourceDictionary Source="pack://Application:,,,/WSATools;component/Styles/SettingExpander.xaml"/>
+        <ResourceDictionary Source="pack://Application:,,,/WSATools;component/Styles/Button.xaml" />
+        <ResourceDictionary Source="pack://Application:,,,/WSATools;component/Styles/TextBlock.xaml" />
+        <ResourceDictionary Source="pack://Application:,,,/WSATools;component/Styles/SettingButton.xaml" />
+        <ResourceDictionary Source="pack://Application:,,,/WSATools;component/Styles/SettingExpander.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <s:Double x:Key="SettingActionControlMinWidth">240</s:Double>
 </ResourceDictionary>

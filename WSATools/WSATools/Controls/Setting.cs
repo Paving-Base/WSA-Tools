@@ -51,7 +51,7 @@ namespace WSATools.Controls
 
         public Setting()
         {
-            this.DefaultStyleKey = typeof(Setting);
+            DefaultStyleKey = typeof(Setting);
         }
 
         public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
@@ -100,13 +100,13 @@ namespace WSATools.Controls
         [Localizable(true)]
         public object Description
         {
-            get => (object)GetValue(DescriptionProperty);
+            get => GetValue(DescriptionProperty);
             set => SetValue(DescriptionProperty, value);
         }
 
         public object Icon
         {
-            get => (object)GetValue(IconProperty);
+            get => GetValue(IconProperty);
             set => SetValue(IconProperty, value);
         }
 
@@ -118,7 +118,7 @@ namespace WSATools.Controls
 
         public object ActionContent
         {
-            get => (object)GetValue(ActionContentProperty);
+            get => GetValue(ActionContentProperty);
             set => SetValue(ActionContentProperty, value);
         }
 
@@ -131,7 +131,7 @@ namespace WSATools.Controls
         public override void OnApplyTemplate()
         {
             IsEnabledChanged -= Setting_IsEnabledChanged;
-            _setting = (Setting)this;
+            _setting = this;
             _rightIconPresenter = (Border)_setting.GetTemplateChild(RightIconPresenter);
             _iconPresenter = (ContentPresenter)_setting.GetTemplateChild(PartIconPresenter);
             _descriptionPresenter = (ContentPresenter)_setting.GetTemplateChild(PartDescriptionPresenter);
@@ -197,7 +197,7 @@ namespace WSATools.Controls
                 }
             }
 
-            if(_setting.RightIcon == null)
+            if (_setting.RightIcon == null)
             {
                 _setting._rightIconPresenter.Visibility = Visibility.Collapsed;
             }

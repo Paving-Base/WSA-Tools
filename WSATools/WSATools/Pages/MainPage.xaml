@@ -1,97 +1,91 @@
 ﻿<ui:Page
     x:Class="WSATools.Pages.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:ui="http://schemas.modernwpf.com/2019"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:animation="clr-namespace:ModernWpf.Media.Animation;assembly=ModernWpf"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
     xmlns:local="clr-namespace:WSATools.Pages"
-    mc:Ignorable="d" 
-    d:DesignHeight="450" d:DesignWidth="800" Title="WSA Tools">
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
+    Title="WSA Tools"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <Grid>
         <ui:NavigationView
-            PaneTitle="WSA Tools"
             x:Name="NavigationView"
-            Loaded="NavigationView_Loaded"
-            IsTitleBarAutoPaddingEnabled="False"
             BackRequested="NavigationView_BackRequested"
+            IsTitleBarAutoPaddingEnabled="False"
+            Loaded="NavigationView_Loaded"
+            PaneTitle="WSA Tools"
             SelectionChanged="NavigationView_SelectionChanged">
             <ui:NavigationView.Resources>
-                <SolidColorBrush x:Key="NavigationViewTopPaneBackground" Color="{DynamicResource SolidBackgroundFillColorBase}"/>
-                <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="{DynamicResource SolidBackgroundFillColorBase}"/>
+                <SolidColorBrush x:Key="NavigationViewTopPaneBackground" Color="{DynamicResource SolidBackgroundFillColorBase}" />
+                <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="{DynamicResource SolidBackgroundFillColorBase}" />
                 <SolidColorBrush x:Key="NavigationViewExpandedPaneBackground" Color="{DynamicResource SolidBackgroundFillColorBase}" />
             </ui:NavigationView.Resources>
             <ui:NavigationView.Header>
-                <Grid
-                    Margin="0,5,0,0"
-                    x:Name="HeaderGrid">
+                <Grid x:Name="HeaderGrid" Margin="0,5,0,0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock
-                        Grid.Column="0"
                         x:Name="HeaderTitle"
+                        Grid.Column="0"
                         HorizontalAlignment="Left"
-                        TextTrimming="CharacterEllipsis"/>
+                        TextTrimming="CharacterEllipsis" />
                     <Grid
-                        Margin="10,0"
-                        Grid.Column="1"
                         x:Name="MessageGrid"
+                        Grid.Column="1"
+                        Margin="10,0"
                         HorizontalAlignment="Right">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
-                        <Grid
-                            Grid.Column="0"
-                            x:Name="MessageBar">
+                        <Grid x:Name="MessageBar" Grid.Column="0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <ui:FontIcon
-                                FontSize="14"
-                                Grid.Column="0"
                                 x:Name="MessageInfo"
-                                FontFamily="Segoe MDL2 Assets"/>
+                                Grid.Column="0"
+                                FontFamily="Segoe MDL2 Assets"
+                                FontSize="14" />
                             <TextBlock
-                                FontSize="14"
-                                Grid.Column="1"
                                 x:Name="Message"
+                                Grid.Column="1"
                                 Margin="2,0,0,0"
-                                TextTrimming="CharacterEllipsis"/>
+                                FontSize="14"
+                                TextTrimming="CharacterEllipsis" />
                         </Grid>
                         <ui:ProgressRing
+                            x:Name="ProgressRing"
+                            Grid.Column="1"
                             Width="20"
                             Height="20"
-                            Grid.Column="1"
-                            x:Name="ProgressRing"
-                            Visibility="Collapsed"
-                            Background="Transparent"/>
+                            Background="Transparent"
+                            Visibility="Collapsed" />
                     </Grid>
                 </Grid>
             </ui:NavigationView.Header>
             <ui:NavigationView.MenuItems>
                 <ui:NavigationViewItem
-                    Tag="Home"
+                    Content="主页"
                     Icon="Home"
-                    Content="主页"/>
+                    Tag="Home" />
             </ui:NavigationView.MenuItems>
-            <Border
-                CornerRadius="8,0,0,0"
-                Background="{DynamicResource LayerFillColorDefaultBrush}">
-                <ui:Frame
-                    x:FieldModifier="public"
-                    x:Name="NavigationViewFrame"/>
+            <Border Background="{DynamicResource LayerFillColorDefaultBrush}" CornerRadius="8,0,0,0">
+                <ui:Frame x:Name="NavigationViewFrame" x:FieldModifier="public" />
             </Border>
         </ui:NavigationView>
         <ui:ProgressBar
             x:Name="ProgressBar"
-            IsIndeterminate="False"
             VerticalAlignment="Top"
-            Background="Transparent"/>
+            Background="Transparent"
+            IsIndeterminate="False" />
     </Grid>
 </ui:Page>

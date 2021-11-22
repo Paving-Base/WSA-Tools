@@ -1,12 +1,7 @@
 ﻿using APPXManager.Helpers;
 using APPXManager.Models;
 using APPXManager.Receivers;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APPXManager.DeviceCommands
 {
@@ -21,7 +16,7 @@ namespace APPXManager.DeviceCommands
 
         static PackageManager()
         {
-            
+
         }
 
         /// <summary>
@@ -50,7 +45,7 @@ namespace APPXManager.DeviceCommands
         /// </summary>
         /// <param name="packagename">Package Family Name</param>
         /// <param name="appname">Application ID</param>
-        public static void LaunchPackage(string packagename,string appname = "App")
+        public static void LaunchPackage(string packagename, string appname = "App")
         {
             ConsoleOutputReceiver receiver = new ConsoleOutputReceiver();
             CommandHelper.ExecuteShellCommand($@"explorer.exe shell:appsFolder\{packagename}!{appname}", receiver);

@@ -1,10 +1,7 @@
 ﻿using APKInstaller.Helpers;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.System;
 using WSATools.Helpers;
@@ -74,7 +71,7 @@ namespace WSATools.ViewModels
 
         public override void Dispose()
         {
-            
+
         }
 
         private async Task CheckUpdate()

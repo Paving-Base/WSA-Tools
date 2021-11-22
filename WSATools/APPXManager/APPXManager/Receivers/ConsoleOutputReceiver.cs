@@ -1,12 +1,8 @@
 ﻿using APPXManager.Exceptions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace APPXManager.Receivers
 {
@@ -47,7 +43,7 @@ namespace APPXManager.Receivers
         /// </returns>
         public override string ToString()
         {
-            return this.output.ToString();
+            return output.ToString();
         }
 
         /// <summary>
@@ -58,31 +54,31 @@ namespace APPXManager.Receivers
         /// </param>
         public void ThrowOnError(string line)
         {
-            if (!this.ParsesErrors)
+            if (!ParsesErrors)
             {
                 if (line.EndsWith(": not found"))
                 {
-                    this.logger.LogWarning($"The remote execution returned: '{line}'");
+                    logger.LogWarning($"The remote execution returned: '{line}'");
                     throw new FileNotFoundException($"The remote execution returned: '{line}'");
                 }
 
                 if (line.EndsWith("No such file or directory"))
                 {
-                    this.logger.LogWarning($"The remote execution returned: {line}");
+                    logger.LogWarning($"The remote execution returned: {line}");
                     throw new FileNotFoundException($"The remote execution returned: '{line}'");
                 }
 
                 // for "unknown options"
                 if (line.Contains("Unknown option"))
                 {
-                    this.logger.LogWarning($"The remote execution returned: {line}");
+                    logger.LogWarning($"The remote execution returned: {line}");
                     throw new UnknownOptionException($"The remote execution returned: '{line}'");
                 }
 
                 // for "aborting" commands
                 if (Regex.IsMatch(line, "Aborting.$", DefaultRegexOptions))
                 {
-                    this.logger.LogWarning($"The remote execution returned: {line}");
+                    logger.LogWarning($"The remote execution returned: {line}");
                     throw new CommandAbortingException($"The remote execution returned: '{line}'");
                 }
 
@@ -90,7 +86,7 @@ namespace APPXManager.Receivers
                 // cmd: applet not found
                 if (Regex.IsMatch(line, "applet not found$", DefaultRegexOptions))
                 {
-                    this.logger.LogWarning($"The remote execution returned: '{line}'");
+                    logger.LogWarning($"The remote execution returned: '{line}'");
                     throw new FileNotFoundException($"The remote execution returned: '{line}'");
                 }
 
@@ -98,7 +94,7 @@ namespace APPXManager.Receivers
                 // workitem: 16822
                 if (Regex.IsMatch(line, "(permission|access) denied$", DefaultRegexOptions))
                 {
-                    this.logger.LogWarning($"The remote execution returned: '{line}'");
+                    logger.LogWarning($"The remote execution returned: '{line}'");
                     throw new PermissionDeniedException($"The remote execution returned: '{line}'");
                 }
             }
@@ -117,9 +113,9 @@ namespace APPXManager.Receivers
                     continue;
                 }
 
-                this.output.AppendLine(line);
+                output.AppendLine(line);
 
-                this.logger.LogDebug(line);
+                logger.LogDebug(line);
             }
         }
     }

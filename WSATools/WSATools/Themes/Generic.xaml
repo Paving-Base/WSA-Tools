@@ -1,7 +1,6 @@
-<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://Application:,,,/WSATools;component/Styles/Setting.xaml"/>
-        <ResourceDictionary Source="pack://Application:,,,/WSATools;component/Styles/SettingsGroup.xaml"/>
+        <ResourceDictionary Source="pack://Application:,,,/WSATools;component/Styles/Setting.xaml" />
+        <ResourceDictionary Source="pack://Application:,,,/WSATools;component/Styles/SettingsGroup.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

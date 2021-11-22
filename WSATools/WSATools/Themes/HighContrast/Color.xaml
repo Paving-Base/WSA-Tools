@@ -3,12 +3,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ui="http://schemas.modernwpf.com/2019">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Common.xaml"/>
+        <ResourceDictionary Source="Common.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <Thickness x:Key="CardBorderThickness">2</Thickness>
     <Color x:Key="InfoBarInformationalSeverityIconBackground">#FF5fb2f2</Color>
-    <StaticResource x:Key="CardBorderBrush" ResourceKey="SystemColorButtonTextColorBrush"/>
-    <SolidColorBrush x:Key="InfoBarInformationalSeverityBackgroundBrush" Color="#FF34424d"/>
-    <StaticResource x:Key="CardBackgroundBrush" ResourceKey="SystemColorButtonFaceColorBrush"/>
-    <StaticResource x:Key="CardPrimaryForegroundBrush" ResourceKey="SystemColorButtonTextColorBrush"/>
+    <StaticResource x:Key="CardBorderBrush" ResourceKey="SystemColorButtonTextColorBrush" />
+    <SolidColorBrush x:Key="InfoBarInformationalSeverityBackgroundBrush" Color="#FF34424d" />
+    <StaticResource x:Key="CardBackgroundBrush" ResourceKey="SystemColorButtonFaceColorBrush" />
+    <StaticResource x:Key="CardPrimaryForegroundBrush" ResourceKey="SystemColorButtonTextColorBrush" />
 </ResourceDictionary>

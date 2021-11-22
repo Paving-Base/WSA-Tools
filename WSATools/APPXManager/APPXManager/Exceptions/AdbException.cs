@@ -1,11 +1,6 @@
 ﻿using APPXManager.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APPXManager.Exceptions
 {
@@ -47,7 +42,7 @@ namespace APPXManager.Exceptions
         public AdbException(string message, string adbError)
             : base(message)
         {
-            this.AdbError = adbError;
+            AdbError = adbError;
         }
 
         /// <summary>
@@ -63,8 +58,8 @@ namespace APPXManager.Exceptions
         public AdbException(string message, AdbResponse response)
             : base(message)
         {
-            this.AdbError = response.Message;
-            this.Response = response;
+            AdbError = response.Message;
+            Response = response;
         }
 
         /// <summary>
@@ -114,7 +109,7 @@ namespace APPXManager.Exceptions
         {
             get
             {
-                var socketException = this.InnerException as SocketException;
+                var socketException = InnerException as SocketException;
 
                 if (socketException == null)
                 {

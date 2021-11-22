@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace APPXManager.Models
+﻿namespace APPXManager.Models
 {
     /// <summary>
     /// An Adb Communication Response
@@ -16,7 +10,7 @@ namespace APPXManager.Models
         /// </summary>
         public AdbResponse()
         {
-            this.Message = string.Empty;
+            Message = string.Empty;
         }
 
         /// <summary>
@@ -104,10 +98,10 @@ namespace APPXManager.Models
                 return false;
             }
 
-            return other.IOSuccess == this.IOSuccess
-                && string.Equals(other.Message, this.Message, StringComparison.OrdinalIgnoreCase)
-                && other.Okay == this.Okay
-                && other.Timeout == this.Timeout;
+            return other.IOSuccess == IOSuccess
+                && string.Equals(other.Message, Message, StringComparison.OrdinalIgnoreCase)
+                && other.Okay == Okay
+                && other.Timeout == Timeout;
         }
 
         /// <summary>
@@ -119,10 +113,10 @@ namespace APPXManager.Models
         public override int GetHashCode()
         {
             int hash = 17;
-            hash = (hash * 23) + this.IOSuccess.GetHashCode();
-            hash = (hash * 23) + this.Message == null ? 0 : this.Message.GetHashCode();
-            hash = (hash * 23) + this.Okay.GetHashCode();
-            hash = (hash * 23) + this.Timeout.GetHashCode();
+            hash = (hash * 23) + IOSuccess.GetHashCode();
+            hash = (hash * 23) + Message == null ? 0 : Message.GetHashCode();
+            hash = (hash * 23) + Okay.GetHashCode();
+            hash = (hash * 23) + Timeout.GetHashCode();
 
             return hash;
         }
@@ -136,13 +130,13 @@ namespace APPXManager.Models
         /// </returns>
         public override string ToString()
         {
-            if (this.Equals(AdbResponse.OK))
+            if (Equals(AdbResponse.OK))
             {
                 return "OK";
             }
             else
             {
-                return $"Error: {this.Message}";
+                return $"Error: {Message}";
             }
         }
     }

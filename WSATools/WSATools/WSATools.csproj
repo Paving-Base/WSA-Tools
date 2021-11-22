@@ -39,6 +39,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\APPXManager\APPXManager.csproj" />
+    <ProjectReference Include="..\APPXManager\APPXManager\APPXManager.csproj" />
     <ProjectReference Include="..\WSATools.Core\WSATools.Core.csproj" />
   </ItemGroup>
 

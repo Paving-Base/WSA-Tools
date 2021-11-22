@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\APPXManager\APPXManager.csproj" />
+    <ProjectReference Include="..\APPXManager\APPXManager\APPXManager.csproj" />
   </ItemGroup>
 
 </Project>

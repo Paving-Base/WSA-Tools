@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "APPXManager.Sample": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

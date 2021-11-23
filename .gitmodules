@@ -1,0 +1,3 @@
+[submodule "WSATools/APPXManager"]
+	path = WSATools/APPXManager
+	url = https://github.com/wherewhere/APPX-Manager.git

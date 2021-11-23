@@ -29,6 +29,9 @@ namespace WSATools.ViewModels
         public HomeViewModel()
         {
             (IsWSAInstalled, WSAInfo) = WSAHelper.GetWSAInfo();
+            ADBHelper.InitilizeADB();
+            ADBHelper.ConnectWSA();
+            ADBHelper.GetStorageInfo();
         }
 
         public override void Dispose()

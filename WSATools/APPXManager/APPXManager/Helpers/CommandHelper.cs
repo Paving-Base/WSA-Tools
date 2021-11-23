@@ -34,7 +34,7 @@ namespace APPXManager.Helpers
         /// <inheritdoc/>
         public static async Task ExecuteShellCommandAsync(string command, IShellOutputReceiver receiver, CancellationToken cancellationToken)
         {
-            var start = new ProcessStartInfo
+            ProcessStartInfo? start = new ProcessStartInfo
             {
                 FileName = "powershell.exe",
                 UseShellExecute = false,
@@ -43,7 +43,7 @@ namespace APPXManager.Helpers
                 CreateNoWindow = true
             };
 
-            using var process = Process.Start(start);
+            using Process? process = Process.Start(start);
 
             process.EnableRaisingEvents = true;
 
@@ -57,7 +57,7 @@ namespace APPXManager.Helpers
                     // -- one of the integration test fetches output 1000 times and found no truncations.
                     while (!cancellationToken.IsCancellationRequested)
                     {
-                        var line = await reader.ReadLineAsync().ConfigureAwait(false);
+                        string? line = await reader.ReadLineAsync().ConfigureAwait(false);
 
                         if (line == null)
                         {

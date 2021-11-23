@@ -23,7 +23,10 @@ namespace WSATools.Core
                 {
                     if (File.Exists(path) && MessageBoxResult.Yes == MessageBox.Show($"已存在文件{Path.GetFileName(path)},是否重新下载？",
                         "提示", MessageBoxButton.YesNo, MessageBoxImage.Question))
+                    {
                         File.Delete(path);
+                    }
+
                     using Stream responseStream = response.GetResponseStream();
                     using Stream fileStream = new FileStream(path, FileMode.CreateNew);
                     byte[] buffer = new byte[20480];
@@ -34,7 +37,10 @@ namespace WSATools.Core
                         fileStream.Write(buffer, 0, bytesRead);
                         DateTime nowTime = DateTime.UtcNow;
                         if ((nowTime - startTime).TotalMinutes > timeout)
+                        {
                             return false;
+                        }
+
                         bytesRead = await responseStream.ReadAsync(buffer, 0, 20480);
                         sumSchedule += 20480;
                         ProcessChange?.Invoke(sumSchedule, response.ContentLength);
@@ -51,10 +57,12 @@ namespace WSATools.Core
         }
         public static void Clear()
         {
-            foreach (var path in array)
+            foreach (string? path in array)
             {
                 if (File.Exists(path))
+                {
                     File.Delete(path);
+                }
             }
         }
     }

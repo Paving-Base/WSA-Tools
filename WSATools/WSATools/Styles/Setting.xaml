@@ -120,6 +120,10 @@
                             <Setter TargetName="HeaderPresenter" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
                             <Setter TargetName="ContentPresenter" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
                             <Setter TargetName="DescriptionPresenter" Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                            <Setter TargetName="ExpandCollapseChevron" Property="Foreground" Value="{DynamicResource SystemControlDisabledBaseMediumLowBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="ExpandCollapseChevron" Property="Foreground" Value="{DynamicResource SystemControlPageTextBaseMediumBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

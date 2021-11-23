@@ -92,7 +92,7 @@ namespace WSATools.Controls
 
         protected override string GetNameCore()
         {
-            var selectedSettingsGroup = (SettingsGroup)Owner;
+            SettingsGroup? selectedSettingsGroup = (SettingsGroup)Owner;
             return selectedSettingsGroup.Header;
         }
     }

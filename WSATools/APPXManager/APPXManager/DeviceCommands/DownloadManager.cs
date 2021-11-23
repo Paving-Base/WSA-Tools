@@ -28,28 +28,28 @@ namespace APPXManager.DeviceCommands
         public static async Task<Dictionary<string, string>> GetPackageFromStore(UrlType type, string uri, Ring ring)
         {
             Dictionary<string, string> list = new Dictionary<string, string>();
-            var handler = new HttpClientHandler()
+            HttpClientHandler? handler = new HttpClientHandler()
             {
                 AutomaticDecompression = DecompressionMethods.GZip
             };
             HttpClient httpClient = new HttpClient(handler);
-            var stringContent = new StringContent(string.Format(content, type, uri, ring), Encoding.UTF8, "application/x-www-form-urlencoded");
-            var respone = await httpClient.PostAsync(API, stringContent);
+            StringContent? stringContent = new StringContent(string.Format(content, type, uri, ring), Encoding.UTF8, "application/x-www-form-urlencoded");
+            HttpResponseMessage? respone = await httpClient.PostAsync(API, stringContent);
             if (respone.StatusCode == HttpStatusCode.OK)
             {
-                var html = await respone.Content.ReadAsStringAsync();
+                string? html = await respone.Content.ReadAsStringAsync();
                 HtmlDocument doc = new HtmlDocument();
                 doc.LoadHtml(html);
-                var table = doc.DocumentNode.SelectSingleNode("table");
+                HtmlNode? table = doc.DocumentNode.SelectSingleNode("table");
                 if (table != null)
                 {
-                    foreach (var tr in table.SelectNodes("tr"))
+                    foreach (HtmlNode? tr in table.SelectNodes("tr"))
                     {
-                        var a = tr.SelectSingleNode("td").SelectSingleNode("a");
+                        HtmlNode? a = tr.SelectSingleNode("td").SelectSingleNode("a");
                         if (a != null)
                         {
-                            var key = a.InnerHtml.ToString();
-                            var value = a.Attributes["href"].Value;
+                            string? key = a.InnerHtml.ToString();
+                            string? value = a.Attributes["href"].Value;
                             list.Add(key, value);
                         }
                     }

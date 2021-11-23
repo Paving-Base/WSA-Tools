@@ -14,7 +14,7 @@ namespace WSATools.Helpers.Converter
         /// <returns>Bool value or false if cast failed</returns>
         internal static bool TryParseBool(object parameter)
         {
-            var parsed = false;
+            bool parsed = false;
             if (parameter != null)
             {
                 bool.TryParse(parameter.ToString(), out parsed);

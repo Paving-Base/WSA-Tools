@@ -10,7 +10,7 @@ namespace WSATools.Core.Helpers
         {
             get
             {
-                var ps = Process.GetProcessesByName("vmmemWSA");
+                Process[]? ps = Process.GetProcessesByName("vmmemWSA");
                 return ps != null && ps.Length > 0;
             }
         }
@@ -20,7 +20,10 @@ namespace WSATools.Core.Helpers
         public static void StartWSA()
         {
             PackageManager.LaunchPackage("MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe");
-            while (IsWSARunning) ;
+            while (IsWSARunning)
+            {
+                ;
+            }
         }
 
     }

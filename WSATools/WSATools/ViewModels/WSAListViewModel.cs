@@ -77,15 +77,18 @@ namespace WSATools.ViewModels
                 {
                     TimeoutEnable = false;
                     Dictionary<string, string> urls = new Dictionary<string, string>();
-                    foreach (var package in Packages)
+                    foreach (ListItem? package in Packages)
+                    {
                         urls.Add(package.Content, package.Tag.ToString());
-                    var timeout = int.Parse(Timeout);
+                    }
+
+                    int timeout = int.Parse(Timeout);
                     if (await AppX.PepairAsync(urls, timeout))
                     {
                         StringBuilder shellBuilder = new StringBuilder();
-                        foreach (var url in urls)
+                        foreach (KeyValuePair<string, string> url in urls)
                         {
-                            var path = Path.Combine(Environment.CurrentDirectory, url.Key);
+                            string? path = Path.Combine(Environment.CurrentDirectory, url.Key);
                             shellBuilder.AppendLine($"Add-AppxPackage {path} -ForceApplicationShutdown");
                         }
                         ExcuteCommand(shellBuilder);
@@ -114,11 +117,14 @@ namespace WSATools.ViewModels
             {
                 Command.Instance.Shell("Set-ExecutionPolicy RemoteSigned", out _);
                 Command.Instance.Shell("Set-ExecutionPolicy -ExecutionPolicy Unrestricted", out _);
-                var file = "install.ps1";
+                string? file = "install.ps1";
                 if (File.Exists(file))
+                {
                     File.Delete(file);
+                }
+
                 File.WriteAllText(file, shellBuilder.ToString());
-                var shellFile = Path.Combine(Environment.CurrentDirectory, file);
+                string? shellFile = Path.Combine(Environment.CurrentDirectory, file);
                 Command.Instance.Shell(shellFile, out string message);
                 LogManager.Instance.LogInfo("Install WSA Script:" + message);
                 File.Delete(shellFile);
@@ -145,12 +151,12 @@ namespace WSATools.ViewModels
             {
                 if (Packages == null || Packages.Count == 0)
                 {
-                    var pairs = await AppX.GetFilePath();
+                    Dictionary<string, string>? pairs = await AppX.GetFilePath();
                     if (pairs != null && pairs.Count > 0)
                     {
-                        foreach (var pair in pairs)
+                        foreach (KeyValuePair<string, string> pair in pairs)
                         {
-                            var item = new ListItem(pair.Key, pair.Value);
+                            ListItem? item = new ListItem(pair.Key, pair.Value);
                             Dispatcher.Invoke(() =>
                             {
                                 Packages.Add(item);

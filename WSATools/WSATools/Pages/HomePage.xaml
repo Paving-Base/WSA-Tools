@@ -18,9 +18,6 @@
     <ui:Page.DataContext>
         <vm:HomeViewModel x:Name="viewModel" />
     </ui:Page.DataContext>
-    <ui:Page.Resources>
-        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-    </ui:Page.Resources>
     <Grid>
         <ui:ScrollViewerEx>
             <StackPanel Margin="16">
@@ -52,7 +49,7 @@
                                 Icon="&#xE7B8;"
                                 Style="{DynamicResource ExpanderHeaderSettingStyle}">
                                 <controls:Setting.ActionContent>
-                                    <Button Content="启动子系统" Visibility="{Binding IsWSAStart, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter='true'}" />
+                                    <Button Content="启动子系统" Visibility="{Binding IsWSAStart, Converter={StaticResource IsEqualToVisibilityConverter}, ConverterParameter='False'}" />
                                 </controls:Setting.ActionContent>
                             </controls:Setting>
                         </Expander.Header>

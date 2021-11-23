@@ -10,7 +10,7 @@ namespace WSATools.Core
         {
             try
             {
-                var zip = new FastZip();
+                FastZip? zip = new FastZip();
                 zip.ExtractZip(zipFileName, targetDirectory, "");
                 File.Delete(zipFileName);
                 return Adb.Instance.HasBrige;

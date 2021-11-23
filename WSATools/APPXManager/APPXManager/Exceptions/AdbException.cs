@@ -109,7 +109,7 @@ namespace APPXManager.Exceptions
         {
             get
             {
-                var socketException = InnerException as SocketException;
+                SocketException? socketException = InnerException as SocketException;
 
                 if (socketException == null)
                 {

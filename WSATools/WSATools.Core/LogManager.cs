@@ -13,14 +13,17 @@ namespace WSATools.Core
             get
             {
                 if (_Instance == null)
+                {
                     _Instance = new LogManager();
+                }
+
                 return _Instance;
             }
         }
         private Logger Logger { get; }
         private LogManager()
         {
-            var LogFile = Path.Combine(Environment.CurrentDirectory, "wsa_tools_log", "log-.txt");
+            string? LogFile = Path.Combine(Environment.CurrentDirectory, "wsa_tools_log", "log-.txt");
             Logger = new LoggerConfiguration().MinimumLevel.Debug()
                 .WriteTo.Async(a => a.File(LogFile, rollingInterval: RollingInterval.Day))
                 .CreateLogger();
@@ -36,7 +39,9 @@ namespace WSATools.Core
             try
             {
                 if (exception != null)
+                {
                     Logger.Error(exception, messageTemplate);
+                }
             }
             catch { }
         }

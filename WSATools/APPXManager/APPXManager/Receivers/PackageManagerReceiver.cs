@@ -38,7 +38,7 @@ namespace APPXManager.Receivers
 
             Packages.Clear();
 
-            foreach (var line in lines)
+            foreach (string? line in lines)
             {
                 if (string.IsNullOrEmpty(line))
                 {

@@ -28,7 +28,6 @@ namespace WSATools.ViewModels
 
         public HomeViewModel()
         {
-            IsWSAStart = WSAHelper.IsWSARunning;
             (IsWSAInstalled, WSAInfo) = WSAHelper.GetWSAInfo();
         }
 

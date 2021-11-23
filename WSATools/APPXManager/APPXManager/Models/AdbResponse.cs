@@ -91,7 +91,7 @@
         /// </returns>
         public override bool Equals(object obj)
         {
-            var other = obj as AdbResponse;
+            AdbResponse? other = obj as AdbResponse;
 
             if (other == null)
             {

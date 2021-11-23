@@ -20,21 +20,21 @@ namespace WSATools.Core
             {
                 if (string.IsNullOrEmpty(deviceCode))
                 {
-                    var find = "arp -a|findstr 00-15-5d";
+                    string? find = "arp -a|findstr 00-15-5d";
                     Command.Instance.Excute(find, out string address);
                     address = address.Substring(find + "&exit").Replace("\r\n", "");
                     if (!string.IsNullOrEmpty(address))
                     {
-                        var wsaIp = address.Splits(new[] { ' ' }).FirstOrDefault();
+                        string? wsaIp = address.Splits(new[] { ' ' }).FirstOrDefault();
                         ExcuteCommand("adb connect " + wsaIp, out _);
                         Thread.Sleep(8);
                         if (ExcuteCommand("adb devices", out string message))
                         {
-                            var lines = message.Substring("List of devices attached");
-                            foreach (var device in lines.Splits("\r\n"))
+                            string? lines = message.Substring("List of devices attached");
+                            foreach (string? device in lines.Splits("\r\n"))
                             {
-                                var code = device.Splits('\t').FirstOrDefault();
-                                var cmd = $"adb -s {code} shell getprop ro.product.model";
+                                string? code = device.Splits('\t').FirstOrDefault();
+                                string? cmd = $"adb -s {code} shell getprop ro.product.model";
                                 ExcuteCommand(cmd, out string name);
                                 name = name.Substring(cmd + "&exit");
                                 if (name.Contains("Subsystem for Android(TM)", StringComparison.CurrentCultureIgnoreCase))
@@ -74,12 +74,16 @@ namespace WSATools.Core
             {
                 if (!HasBrige)
                 {
-                    var url = "https://dl.google.com/android/repository/platform-tools-latest-windows.zip";
-                    var path = Path.Combine(Environment.CurrentDirectory, "platform-tools-latest-windows.zip");
+                    string? url = "https://dl.google.com/android/repository/platform-tools-latest-windows.zip";
+                    string? path = Path.Combine(Environment.CurrentDirectory, "platform-tools-latest-windows.zip");
                     if (await Downloader.Create(url, path))
+                    {
                         return Zipper.UnZip(path, Environment.CurrentDirectory);
+                    }
                     else
+                    {
                         return false;
+                    }
                 }
                 return true;
             }
@@ -90,11 +94,13 @@ namespace WSATools.Core
         }
         public string Reload()
         {
-            var processes = Process.GetProcessesByName("ADB.EXE");
+            Process[]? processes = Process.GetProcessesByName("ADB.EXE");
             if (processes != null && processes.Length > 0)
             {
-                foreach (var process in processes)
+                foreach (Process? process in processes)
+                {
                     process.Kill();
+                }
             }
             ExcuteCommand("adb devices", out string message);
             return message;
@@ -108,14 +114,16 @@ namespace WSATools.Core
                 $"adb -s {DeviceCode} shell pm list packages|grep {condition}";
                 if (ExcuteCommand(command, out string message))
                 {
-                    var lines = message.Substring($"{command}&exit");
-                    foreach (var item in lines.Splits("\r\n"))
+                    string? lines = message.Substring($"{command}&exit");
+                    foreach (string? item in lines.Splits("\r\n"))
                     {
                         if (!string.IsNullOrEmpty(item))
                         {
-                            var name = item.Splits(':').LastOrDefault();
+                            string? name = item.Splits(':').LastOrDefault();
                             if (!IgnorePackages.Contains(name))
+                            {
                                 packages.Add(name);
+                            }
                         }
                     }
                 }
@@ -125,36 +133,51 @@ namespace WSATools.Core
         public bool Install(string packagePath)
         {
             if (string.IsNullOrEmpty(DeviceCode))
+            {
                 return false;
+            }
             else
             {
                 string command = $"adb -s{DeviceCode} install {packagePath}";
                 if (ExcuteCommand(command, out string message))
+                {
                     return message.Substring($"{command}&exit").Contains("success", StringComparison.CurrentCultureIgnoreCase);
+                }
+
                 return false;
             }
         }
         public bool Downgrade(string packagePath)
         {
             if (string.IsNullOrEmpty(DeviceCode))
+            {
                 return false;
+            }
             else
             {
                 string command = $"adb -s{DeviceCode} -r -d install {packagePath}";
                 if (ExcuteCommand(command, out string message))
+                {
                     return message.Substring($"{command}&exit").Contains("success", StringComparison.CurrentCultureIgnoreCase);
+                }
+
                 return false;
             }
         }
         public bool Remove(string packageName)
         {
             if (string.IsNullOrEmpty(DeviceCode))
+            {
                 return false;
+            }
             else
             {
                 string command = $"adb -s {DeviceCode} shell pm uninstall --user 0 {packageName}";
                 if (ExcuteCommand(command, out string message))
+                {
                     return message.Substring($"{command}&exit").Contains("success", StringComparison.CurrentCultureIgnoreCase);
+                }
+
                 return false;
             }
         }

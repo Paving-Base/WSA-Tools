@@ -17,10 +17,6 @@
     <ui:Page.DataContext>
         <vm:SettingsViewModel x:Name="viewModel" />
     </ui:Page.DataContext>
-    <ui:Page.Resources>
-        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-        <converter:UpdateStateToVisibilityConverter x:Key="UpdateStateToVisibilityConverter" />
-    </ui:Page.Resources>
     <Grid>
         <ui:ScrollViewerEx>
             <StackPanel Margin="16">
@@ -75,7 +71,7 @@
                         Background="{DynamicResource SystemFillColorCriticalBackgroundBrush}"
                         Description="{Binding UpdateErrorMessage}"
                         Header="检查失败"
-                        Visibility="{Binding UpdateInfo.UpdateState, Converter={StaticResource UpdateStateToVisibilityConverter}, ConverterParameter='CheckFailed'}">
+                        Visibility="{Binding UpdateInfo.UpdateState, Converter={StaticResource IsEqualToVisibilityConverter}, ConverterParameter='CheckFailed'}">
                         <controls:Setting.Icon>
                             <Grid Margin="2">
                                 <ui:FontIcon
@@ -96,7 +92,7 @@
                         Background="{DynamicResource SystemFillColorCautionBackgroundBrush}"
                         Description="{Binding UpdateInfo.TagName}"
                         Header="发现新版本"
-                        Visibility="{Binding UpdateInfo.UpdateState, Converter={StaticResource UpdateStateToVisibilityConverter}, ConverterParameter='ReadyToDownload'}">
+                        Visibility="{Binding UpdateInfo.UpdateState, Converter={StaticResource IsEqualToVisibilityConverter}, ConverterParameter='ReadyToDownload'}">
                         <controls:Setting.Icon>
                             <Grid Margin="2">
                                 <ui:FontIcon
@@ -119,7 +115,7 @@
                     <controls:Setting
                         Background="{DynamicResource SystemFillColorSuccessBackgroundBrush}"
                         Header="WSA Tools 是最新的"
-                        Visibility="{Binding UpdateInfo.UpdateState, Converter={StaticResource UpdateStateToVisibilityConverter}, ConverterParameter='UpToDate'}">
+                        Visibility="{Binding UpdateInfo.UpdateState, Converter={StaticResource IsEqualToVisibilityConverter}, ConverterParameter='UpToDate'}">
                         <controls:Setting.Icon>
                             <Grid Margin="2">
                                 <ui:FontIcon

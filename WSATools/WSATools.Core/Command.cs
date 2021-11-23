@@ -13,7 +13,10 @@ namespace WSATools.Core
             get
             {
                 if (instance == null)
+                {
                     instance = new Command();
+                }
+
                 return instance;
             }
         }
@@ -22,7 +25,7 @@ namespace WSATools.Core
         {
             try
             {
-                var process = new Process();
+                Process? process = new Process();
                 process.StartInfo.CreateNoWindow = true;
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardOutput = true;
@@ -71,7 +74,7 @@ namespace WSATools.Core
         {
             try
             {
-                var total = cmds.Count();
+                int total = cmds.Count();
                 Process process = new Process();
                 process.StartInfo.FileName = "cmd.exe";
                 process.StartInfo.RedirectStandardInput = true;
@@ -80,13 +83,17 @@ namespace WSATools.Core
                 process.StartInfo.CreateNoWindow = true;
                 process.StartInfo.UseShellExecute = false;
                 process.Start();
-                for (var idx = 0; idx < total; idx++)
+                for (int idx = 0; idx < total; idx++)
                 {
-                    var cmd = cmds.ElementAt(idx);
+                    string? cmd = cmds.ElementAt(idx);
                     if (idx == total - 1)
+                    {
                         process.StandardInput.WriteLine(cmd + "&exit");
+                    }
                     else
+                    {
                         process.StandardInput.WriteLine(cmd);
+                    }
                 }
                 process.StandardInput.AutoFlush = true;
                 message = process.StandardOutput.ReadToEnd();

@@ -128,6 +128,24 @@
                                 TextTrimming="CharacterEllipsis" />
                         </Grid>
                     </Expander>
+                    <controls:Setting Description="Internal Storage" Header="Storage">
+                        <controls:Setting.Icon>
+                            <ui:FontIcon FontFamily="{DynamicResource SymbolThemeFontFamily}" Glyph="&#xEDA2;" />
+                        </controls:Setting.Icon>
+
+                        <controls:Setting.ActionContent>
+                            <ui:SimpleStackPanel Spacing="8">
+                                <ui:ProgressBar
+                                    x:Name="InternalStorageUsage"
+                                    HorizontalAlignment="Stretch"
+                                    Value="{Binding StorageUsage}" />
+                                <TextBlock
+                                    x:Name="UsageDesc"
+                                    Text="{Binding StorageUsageText}"
+                                    TextAlignment="Left" />
+                            </ui:SimpleStackPanel>
+                        </controls:Setting.ActionContent>
+                    </controls:Setting>
                 </controls:SettingsGroup>
             </StackPanel>
         </ui:ScrollViewerEx>

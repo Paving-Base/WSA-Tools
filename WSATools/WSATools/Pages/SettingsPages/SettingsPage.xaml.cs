@@ -1,4 +1,5 @@
-﻿using System.Windows.Navigation;
+﻿using ModernWpf.Controls;
+using System.Windows.Navigation;
 using WSATools.ViewModels;
 
 namespace WSATools.Pages.SettingsPages
@@ -6,7 +7,7 @@ namespace WSATools.Pages.SettingsPages
     /// <summary>
     /// SettingsPage.xaml 的交互逻辑
     /// </summary>
-    public partial class SettingsPage : ModernWpf.Controls.Page
+    public partial class SettingsPage : Page
     {
         private SettingsViewModel ViewModel;
 

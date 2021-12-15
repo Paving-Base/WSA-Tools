@@ -1,5 +1,6 @@
 ﻿using APPXManager.Models;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using WSATools.Core.Helpers;
 using WSATools.Core.Models;
 using WSATools.Helpers;
@@ -48,6 +49,10 @@ namespace WSATools.ViewModels
             (IsWSAInstalled, WSAInfo) = WSAHelper.GetWSAInfo();
             ADBHelper.InitilizeADB();
             ADBHelper.ConnectWSA();
+        }
+
+        public override async Task Refresh()
+        {
             ObservableCollection<StorageInfo>? storages = ADBHelper.GetStorageInfo();
             int Size = 0, Used = 0, Available = 0;
             foreach (StorageInfo? storage in storages)

@@ -69,6 +69,11 @@ namespace WSATools.ViewModels
             if (UpdateDate == DateTime.MinValue) { _ = CheckUpdate(); }
         }
 
+        public override async Task Refresh()
+        {
+
+        }
+
         public override void Dispose()
         {
 

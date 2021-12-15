@@ -3,11 +3,9 @@ using ModernWpf.Media.Animation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Navigation;
-using WSATools.Core.Helpers;
 using WSATools.Helpers;
 using WSATools.Pages.SettingsPages;
 
@@ -16,11 +14,12 @@ namespace WSATools.Pages
     /// <summary>
     /// MainPage.xaml 的交互逻辑
     /// </summary>
-    public partial class MainPage : ModernWpf.Controls.Page
+    public partial class MainPage : Page
     {
         private readonly List<(string Tag, Type Page)> _pages = new()
         {
             ("Home", typeof(HomePage)),
+            ("Apps", typeof(AppsPage)),
         };
 
         public MainPage()

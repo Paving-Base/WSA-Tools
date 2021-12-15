@@ -1,4 +1,5 @@
 ﻿using AdvancedSharpAdbClient;
+using AdvancedSharpAdbClient.DeviceCommands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -71,6 +72,29 @@ namespace WSATools.Core.Helpers
             {
                 IsConnectWSA = false;
             }
+        }
+
+        public static ObservableCollection<APKInfo> GetAppsList()
+        {
+            ObservableCollection<APKInfo> Applications = new ObservableCollection<APKInfo>();
+            AdvancedAdbClient client = new AdvancedAdbClient();
+            PackageManager manager = new PackageManager(client, WSA);
+            foreach (KeyValuePair<string, string> app in manager.Packages)
+            {
+                if (!string.IsNullOrEmpty(app.Key))
+                {
+                    ConsoleOutputReceiver receiver = new ConsoleOutputReceiver();
+                    client.ExecuteRemoteCommand($"pidof {app.Key}", WSA, receiver);
+                    bool isactive = !string.IsNullOrEmpty(receiver.ToString());
+                    Applications.Add(new APKInfo()
+                    {
+                        Name = app.Key,
+                        IsActive = isactive,
+                        VersionInfo = manager.GetVersionInfo(app.Key)
+                    });
+                }
+            }
+            return Applications;
         }
 
         public static ObservableCollection<StorageInfo> GetStorageInfo()

@@ -69,6 +69,8 @@ namespace WSATools.ViewModels
             });
         }
 
+        public abstract Task Refresh();
+
         public abstract void Dispose();
     }
 }

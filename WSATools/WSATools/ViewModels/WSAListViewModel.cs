@@ -16,42 +16,49 @@ namespace WSATools.ViewModels
         public IAsyncRelayCommand CloseCommand { get; }
         public IAsyncRelayCommand RreshCommand { get; }
         public IAsyncRelayCommand InstallCommand { get; }
+
         public WSAListViewModel()
         {
             CloseCommand = new AsyncRelayCommand(CloseAsync);
             RreshCommand = new AsyncRelayCommand(RreshAsync);
             InstallCommand = new AsyncRelayCommand(InstallAsync);
         }
+
         private ObservableCollection<ListItem> packages = new ObservableCollection<ListItem>();
         public ObservableCollection<ListItem> Packages
         {
             get => packages;
             set => SetProperty(ref packages, value);
         }
+
         private bool timeoutEnable = true;
         public bool TimeoutEnable
         {
             get => timeoutEnable;
             set => SetProperty(ref timeoutEnable, value);
         }
+
         private decimal processVal = 0;
         public decimal ProcessVal
         {
             get => processVal;
             set => SetProperty(ref processVal, value);
         }
+
         private string timeout = "30";
         public string Timeout
         {
             get => timeout;
             set => SetProperty(ref timeout, value);
         }
+
         private bool installEnable = true;
         public bool InstallEnable
         {
             get => installEnable;
             set => SetProperty(ref installEnable, value);
         }
+
         private Task RreshAsync()
         {
             RunOnUIThread(async () =>
@@ -62,11 +69,13 @@ namespace WSATools.ViewModels
             });
             return Task.CompletedTask;
         }
+
         private Task CloseAsync()
         {
             Close?.Invoke(this, false);
             return Task.CompletedTask;
         }
+
         private Task InstallAsync()
         {
             RunOnUIThread(async () =>
@@ -111,6 +120,7 @@ namespace WSATools.ViewModels
             });
             return Task.CompletedTask;
         }
+
         private void ExcuteCommand(StringBuilder shellBuilder)
         {
             try
@@ -134,16 +144,19 @@ namespace WSATools.ViewModels
                 LogManager.Instance.LogError("ExcuteCommand", ex);
             }
         }
+
         public async void LoadAsync(object sender, EventArgs e)
         {
             Dispatcher = (sender as WSAList).Dispatcher;
             Downloader.ProcessChange += Downloader_ProcessChange;
             await GetList();
         }
+
         private void Downloader_ProcessChange(int receiveSize, long totalSize)
         {
             ProcessVal = Math.Round((decimal)receiveSize / totalSize * 100, 2);
         }
+
         private async Task GetList()
         {
             LoadVisable = Visibility.Visible;
@@ -176,6 +189,12 @@ namespace WSATools.ViewModels
             }
             LoadVisable = Visibility.Collapsed;
         }
+
+        public override async Task Refresh()
+        {
+
+        }
+
         public override void Dispose()
         {
             Downloader.ProcessChange -= Downloader_ProcessChange;

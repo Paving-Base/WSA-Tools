@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using MicaWPF.Controls;
+using System.Windows;
 using WSATools.Helpers;
 using WSATools.Pages;
 
@@ -7,7 +8,7 @@ namespace WSATools
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MicaWindow
     {
         public MainWindow()
         {

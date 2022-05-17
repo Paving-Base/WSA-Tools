@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
+using Windows.Foundation.Collections;
+using Windows.System;
 
 namespace WSATools.Pages.SettingsPages
 {

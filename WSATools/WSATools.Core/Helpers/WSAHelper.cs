@@ -10,7 +10,7 @@ namespace WSATools.Core.Helpers
         {
             get
             {
-                Process[]? ps = Process.GetProcessesByName("vmmemWSA");
+                Process[] ps = Process.GetProcessesByName("vmmemWSA");
                 return ps != null && ps.Length > 0;
             }
         }

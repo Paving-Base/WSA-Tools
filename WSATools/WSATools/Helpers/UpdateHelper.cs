@@ -42,7 +42,7 @@ namespace APKInstaller.Helpers
                 response = await client.GetAsync(url);
             }
             string responseBody = await response.Content.ReadAsStringAsync();
-            UpdateInfo? result = JsonSerializer.Deserialize<UpdateInfo>(responseBody);
+            UpdateInfo result = JsonSerializer.Deserialize<UpdateInfo>(responseBody);
 
             if (result != null)
             {
@@ -79,7 +79,7 @@ namespace APKInstaller.Helpers
 
         private static SystemVersionInfo GetAsVersionInfo(string version)
         {
-            System.Collections.Generic.List<int>? nums = GetVersionNumbers(version).Split('.').Select(int.Parse).ToList();
+            System.Collections.Generic.List<int> nums = GetVersionNumbers(version).Split('.').Select(int.Parse).ToList();
 
             if (nums.Count <= 1)
             {
@@ -101,7 +101,7 @@ namespace APKInstaller.Helpers
 
         private static string GetVersionNumbers(string version)
         {
-            string? allowedChars = "01234567890.";
+            string allowedChars = "01234567890.";
             return new string(version.Where(c => allowedChars.Contains(c)).ToArray());
         }
     }

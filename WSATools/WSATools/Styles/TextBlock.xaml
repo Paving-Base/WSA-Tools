@@ -10,7 +10,6 @@
         <Setter Property="FontFamily" Value="XamlAutoFontFamily" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
         <Setter Property="LineStackingStrategy" Value="MaxHeight" />
-        <Setter Property="AutomationProperties.HeadingLevel" Value="Level3" />
         <Setter Property="FontSize" Value="{DynamicResource BodyTextBlockFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultTextForegroundThemeBrush}" />
     </Style>

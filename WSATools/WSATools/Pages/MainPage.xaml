@@ -2,76 +2,47 @@
     x:Class="WSATools.Pages.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:animation="clr-namespace:ModernWpf.Media.Animation;assembly=ModernWpf"
+    xmlns:controls="clr-namespace:WSATools.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-    xmlns:local="clr-namespace:WSATools.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.modernwpf.com/2019"
     Title="WSA Tools"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <ui:Page.Resources>
+        <DataTemplate x:Key="NavigationViewHeaderTemplate">
+            <controls:PageHeader
+                Title="{Binding Header, ElementName=NavigationView}"
+                Background="Transparent"
+                BackgroundColorOpacity="1" />
+        </DataTemplate>
+    </ui:Page.Resources>
+
     <Grid>
+        <Border
+            x:Name="AppTitleBar"
+            Height="{Binding ElementName=NavigationView, Path=CompactPaneLength}"
+            VerticalAlignment="Top"
+            Canvas.ZIndex="1"
+            IsHitTestVisible="True">
+            <TextBlock
+                x:Name="AppTitle"
+                VerticalAlignment="Center"
+                Style="{DynamicResource CaptionTextBlockStyle}"
+                Text="{Binding Title, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                TextTrimming="CharacterEllipsis" />
+        </Border>
         <ui:NavigationView
             x:Name="NavigationView"
             BackRequested="NavigationView_BackRequested"
+            DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
+            HeaderTemplate="{StaticResource NavigationViewHeaderTemplate}"
             IsTitleBarAutoPaddingEnabled="False"
             Loaded="NavigationView_Loaded"
-            PaneTitle="WSA Tools"
+            PaneClosing="NavigationViewControl_PaneClosing"
+            PaneOpening="NavigationViewControl_PaneOpening"
             SelectionChanged="NavigationView_SelectionChanged">
-            <ui:NavigationView.Resources>
-                <SolidColorBrush x:Key="NavigationViewTopPaneBackground" Color="{DynamicResource SolidBackgroundFillColorBase}" />
-                <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="{DynamicResource SolidBackgroundFillColorBase}" />
-                <SolidColorBrush x:Key="NavigationViewExpandedPaneBackground" Color="{DynamicResource SolidBackgroundFillColorBase}" />
-            </ui:NavigationView.Resources>
-            <ui:NavigationView.Header>
-                <Grid x:Name="HeaderGrid" Margin="0,5,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock
-                        x:Name="HeaderTitle"
-                        Grid.Column="0"
-                        HorizontalAlignment="Left"
-                        TextTrimming="CharacterEllipsis" />
-                    <Grid
-                        x:Name="MessageGrid"
-                        Grid.Column="1"
-                        Margin="10,0"
-                        HorizontalAlignment="Right">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="auto" />
-                        </Grid.ColumnDefinitions>
-                        <Grid x:Name="MessageBar" Grid.Column="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <ui:FontIcon
-                                x:Name="MessageInfo"
-                                Grid.Column="0"
-                                FontFamily="Segoe MDL2 Assets"
-                                FontSize="14" />
-                            <TextBlock
-                                x:Name="Message"
-                                Grid.Column="1"
-                                Margin="2,0,0,0"
-                                FontSize="14"
-                                TextTrimming="CharacterEllipsis" />
-                        </Grid>
-                        <ui:ProgressRing
-                            x:Name="ProgressRing"
-                            Grid.Column="1"
-                            Width="20"
-                            Height="20"
-                            Background="Transparent"
-                            Visibility="Collapsed" />
-                    </Grid>
-                </Grid>
-            </ui:NavigationView.Header>
             <ui:NavigationView.MenuItems>
                 <ui:NavigationViewItem
                     Content="主页"
@@ -82,9 +53,7 @@
                     Icon="List"
                     Tag="Apps" />
             </ui:NavigationView.MenuItems>
-            <Border Background="{DynamicResource LayerFillColorDefaultBrush}" CornerRadius="8,0,0,0">
-                <ui:Frame x:Name="NavigationViewFrame" x:FieldModifier="public" />
-            </Border>
+            <ui:Frame x:Name="NavigationViewFrame" x:FieldModifier="public" />
         </ui:NavigationView>
         <ui:ProgressBar
             x:Name="ProgressBar"

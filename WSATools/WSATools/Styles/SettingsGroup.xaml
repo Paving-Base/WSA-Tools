@@ -26,7 +26,6 @@
                             x:Name="HeaderPresenter"
                             Grid.Row="0"
                             Margin="1,32,0,8"
-                            AutomationProperties.HeadingLevel="Level2"
                             Style="{DynamicResource BodyStrongTextBlockStyle}"
                             Text="{TemplateBinding Header}" />
                         <ItemsPresenter Grid.Row="1" />

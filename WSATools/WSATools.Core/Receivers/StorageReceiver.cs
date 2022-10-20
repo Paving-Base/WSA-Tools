@@ -27,7 +27,7 @@ namespace WSATools.Core.Receivers
         {
             Storages.Clear();
 
-            foreach (string? line in lines)
+            foreach (string line in lines)
             {
                 if (!string.IsNullOrEmpty(line) && !line.StartsWith("Filesystem"))
                 {

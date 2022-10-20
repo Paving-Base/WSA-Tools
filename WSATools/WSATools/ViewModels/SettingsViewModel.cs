@@ -1,6 +1,7 @@
 ﻿using APKInstaller.Helpers;
-using Microsoft.Toolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Input;
 using System;
+using System.ComponentModel;
 using System.Reflection;
 using System.Threading.Tasks;
 using Windows.System;
@@ -11,11 +12,11 @@ using WSATools.Properties;
 
 namespace WSATools.ViewModels
 {
-    public sealed class SettingsViewModel : ViewModelBase
+    public sealed class SettingsViewModel : INotifyPropertyChanged
     {
-        public IAsyncRelayCommand GotoUpdateCommand { get; }
+        public IRelayCommand GotoUpdateCommand { get; }
+        public IRelayCommand GotoTestPageCommand { get; }
         public IAsyncRelayCommand CheackUpdateCommand { get; }
-        public IAsyncRelayCommand GotoTestPageCommand { get; }
 
         private DateTime _updateDate = Settings.Default.UpdateDate;
         public DateTime UpdateDate
@@ -23,10 +24,13 @@ namespace WSATools.ViewModels
             get => _updateDate;
             set
             {
-                Settings.Default.UpdateDate = value;
-                Settings.Default.Save();
-                value = Settings.Default.UpdateDate;
-                SetProperty(ref _updateDate, value);
+                if (_updateDate != value)
+                {
+                    Settings.Default.UpdateDate = value;
+                    Settings.Default.Save();
+                    _updateDate = Settings.Default.UpdateDate;
+                    RaisePropertyChangedEvent();
+                }
             }
         }
 
@@ -34,21 +38,42 @@ namespace WSATools.ViewModels
         public UpdateInfo UpdateInfo
         {
             get => _updateInfo;
-            set => SetProperty(ref _updateInfo, value);
+            set
+            {
+                if (_updateInfo != value)
+                {
+                    _updateInfo = value;
+                    RaisePropertyChangedEvent();
+                }
+            }
         }
 
         private string _updateErrorMessage = string.Empty;
         public string UpdateErrorMessage
         {
             get => _updateErrorMessage;
-            set => SetProperty(ref _updateErrorMessage, value);
+            set
+            {
+                if (_updateErrorMessage != value)
+                {
+                    _updateErrorMessage = value;
+                    RaisePropertyChangedEvent();
+                }
+            }
         }
 
         private bool _checkingUpdate = false;
         public bool CheckingUpdate
         {
             get => _checkingUpdate;
-            set => SetProperty(ref _checkingUpdate, value);
+            set
+            {
+                if (_checkingUpdate != value)
+                {
+                    _checkingUpdate = value;
+                    RaisePropertyChangedEvent();
+                }
+            }
         }
 
         public string VersionText
@@ -61,22 +86,19 @@ namespace WSATools.ViewModels
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChangedEvent([System.Runtime.CompilerServices.CallerMemberName] string name = null)
+        {
+            if (name != null) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name)); }
+        }
+
         public SettingsViewModel()
         {
-            GotoUpdateCommand = new AsyncRelayCommand(GotoUpdate);
+            GotoUpdateCommand = new RelayCommand(GotoUpdate);
+            GotoTestPageCommand = new RelayCommand(GotoTestPage);
             CheackUpdateCommand = new AsyncRelayCommand(CheckUpdate);
-            GotoTestPageCommand = new AsyncRelayCommand(GotoTestPage);
             if (UpdateDate == DateTime.MinValue) { _ = CheckUpdate(); }
-        }
-
-        public override async Task Refresh()
-        {
-
-        }
-
-        public override void Dispose()
-        {
-
         }
 
         private async Task CheckUpdate()
@@ -98,8 +120,8 @@ namespace WSATools.ViewModels
             CheckingUpdate = false;
         }
 
-        private async Task GotoTestPage() => UIHelper.Navigate(typeof(TestPage));
+        private void GotoTestPage() => UIHelper.Navigate(typeof(TestPage));
 
-        private async Task GotoUpdate() => _ = Launcher.LaunchUriAsync(new Uri(UpdateInfo.ReleaseUrl));
+        private void GotoUpdate() => _ = Launcher.LaunchUriAsync(new Uri(UpdateInfo.ReleaseUrl));
     }
 }

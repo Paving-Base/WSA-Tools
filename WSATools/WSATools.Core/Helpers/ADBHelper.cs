@@ -15,16 +15,16 @@ namespace WSATools.Core.Helpers
 {
     public static class ADBHelper
     {
-        private static IEnumerable<DeviceData>? DeviceList;
+        private static IEnumerable<DeviceData> DeviceList;
 
-        public static DeviceData? WSA;
+        public static DeviceData WSA;
         public static bool IsConnectWSA = false;
         public static StartServerResult? ADBStatus;
         public static AdvancedAdbClient ADBClient = new AdvancedAdbClient();
         public static DeviceMonitor Monitor = new DeviceMonitor(new AdbSocket(new IPEndPoint(IPAddress.Loopback, AdvancedAdbClient.AdbServerPort)));
 
         public static void InitilizeADB() => InitilizeADB(null);
-        public static void InitilizeADB(IProgress<double>? progress)
+        public static void InitilizeADB(IProgress<double> progress)
         {
             Process[] processes = Process.GetProcessesByName("adb");
             if (processes != null && processes.Any())
@@ -47,7 +47,7 @@ namespace WSATools.Core.Helpers
         }
 
         public static void ConnectWSA() => ConnectWSA(null);
-        public static void ConnectWSA(IProgress<double>? progress)
+        public static void ConnectWSA(IProgress<double> progress)
         {
             if (DeviceList != null && DeviceList.Any())
             {
@@ -107,7 +107,7 @@ namespace WSATools.Core.Helpers
             return receiver.Storages;
         }
 
-        private static void OnDeviceChanged(object? sender, DeviceDataEventArgs e)
+        private static void OnDeviceChanged(object sender, DeviceDataEventArgs e)
         {
             DeviceList = new AdvancedAdbClient().GetDevices();
         }

@@ -9,8 +9,8 @@ namespace WSATools.Core.Models
 {
     public class APKInfo
     {
-        public string? Name { get; set; }
+        public string Name { get; set; }
         public bool IsActive { get; set; }
-        public VersionInfo? VersionInfo { get; set; }
+        public VersionInfo VersionInfo { get; set; }
     }
 }

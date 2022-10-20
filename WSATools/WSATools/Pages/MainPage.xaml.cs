@@ -1,4 +1,5 @@
-﻿using ModernWpf.Controls;
+﻿using ModernWpf;
+using ModernWpf.Controls;
 using ModernWpf.Media.Animation;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using WSATools.Controls;
 using WSATools.Helpers;
 using WSATools.Pages.SettingsPages;
 
@@ -16,6 +18,8 @@ namespace WSATools.Pages
     /// </summary>
     public partial class MainPage : Page
     {
+        public PageHeader PageHeader => NavigationView.FindDescendant<PageHeader>();
+
         private readonly List<(string Tag, Type Page)> _pages = new()
         {
             ("Home", typeof(HomePage)),
@@ -26,6 +30,7 @@ namespace WSATools.Pages
         {
             InitializeComponent();
             UIHelper.MainPage = this;
+            NavigationView.PaneDisplayMode = NavigationViewPaneDisplayMode.Left;
         }
 
         private void NavigationView_Loaded(object sender, RoutedEventArgs e)
@@ -33,6 +38,7 @@ namespace WSATools.Pages
             // Add handler for ContentFrame navigation.
             NavigationViewFrame.Navigated += On_Navigated;
             NavigationView.SelectedItem = NavigationView.MenuItems[0];
+            NavigationView.PaneDisplayMode = NavigationViewPaneDisplayMode.Auto;
         }
 
         private void NavigationView_Navigate(string NavItemTag, NavigationTransitionInfo TransitionInfo)
@@ -95,11 +101,11 @@ namespace WSATools.Pages
             {
                 // SettingsItem is not part of NavView.MenuItems, and doesn't have a Tag.
                 NavigationView.SelectedItem = (NavigationViewItem)NavigationView.SettingsItem;
-                HeaderTitle.Text = "设置";
+                NavigationView.Header = "设置";
             }
             else if (NavigationViewFrame.SourcePageType == typeof(TestPage))
             {
-                HeaderTitle.Text = "测试";
+                NavigationView.Header = "测试";
             }
             else if (NavigationViewFrame.SourcePageType != null)
             {
@@ -122,7 +128,60 @@ namespace WSATools.Pages
                     catch { }
                 }
 
-                HeaderTitle.Text = (((NavigationViewItem)NavigationView.SelectedItem)?.Content?.ToString());
+                NavigationView.Header = (((NavigationViewItem)NavigationView.SelectedItem)?.Content?.ToString());
+            }
+        }
+
+        private void NavigationViewControl_PaneClosing(NavigationView sender, NavigationViewPaneClosingEventArgs args)
+        {
+            UpdateAppTitleMargin(sender);
+        }
+
+        private void NavigationViewControl_PaneOpening(NavigationView sender, object args)
+        {
+            UpdateAppTitleMargin(sender);
+        }
+
+        private void NavigationViewControl_DisplayModeChanged(NavigationView sender, NavigationViewDisplayModeChangedEventArgs args)
+        {
+            Thickness currMargin = AppTitleBar.Margin;
+
+            AppTitleBar.Margin = sender.DisplayMode == NavigationViewDisplayMode.Minimal &&
+                         sender.IsBackButtonVisible != NavigationViewBackButtonVisible.Collapsed
+                ? new Thickness((sender.CompactPaneLength * 2) - 8, currMargin.Top, currMargin.Right, currMargin.Bottom)
+                : new Thickness(sender.CompactPaneLength, currMargin.Top, currMargin.Right, currMargin.Bottom);
+
+            UpdateAppTitleMargin(sender);
+            UpdateHeaderMargin(sender);
+        }
+
+        private void UpdateAppTitleMargin(NavigationView sender)
+        {
+            const int smallLeftIndent = 4, largeLeftIndent = 24;
+
+            Thickness currMargin = AppTitle.Margin;
+
+            AppTitle.Margin = (sender.DisplayMode == NavigationViewDisplayMode.Expanded && sender.IsPaneOpen) ||
+                     (sender.DisplayMode == NavigationViewDisplayMode.Compact && sender.IsPaneOpen) ||
+                     sender.DisplayMode == NavigationViewDisplayMode.Minimal
+                ? new Thickness(smallLeftIndent, currMargin.Top, currMargin.Right, currMargin.Bottom)
+                : new Thickness(largeLeftIndent, currMargin.Top, currMargin.Right, currMargin.Bottom);
+        }
+
+        private void UpdateHeaderMargin(NavigationView sender)
+        {
+            if (PageHeader != null)
+            {
+                PageHeader.HeaderPadding = sender.DisplayMode == NavigationViewDisplayMode.Minimal
+                    ? (Thickness)Application.Current.Resources["PageHeaderMinimalPadding"]
+                    : (Thickness)Application.Current.Resources["PageHeaderDefaultPadding"];
+
+                Thickness currMargin = PageHeader.Margin;
+
+                PageHeader.Margin = sender.DisplayMode == NavigationViewDisplayMode.Minimal &&
+                         sender.IsBackButtonVisible != NavigationViewBackButtonVisible.Collapsed
+                    ? new Thickness(-sender.CompactPaneLength + 8, currMargin.Top, currMargin.Right, currMargin.Bottom)
+                    : new Thickness(0, currMargin.Top, currMargin.Right, currMargin.Bottom);
             }
         }
 
@@ -137,14 +196,20 @@ namespace WSATools.Pages
 
         public void ShowProgressRing()
         {
-            ProgressRing.Visibility = Visibility.Visible;
-            ProgressRing.IsActive = true;
+            if (PageHeader != null)
+            {
+                PageHeader.ProgressRing.Visibility = Visibility.Visible;
+                PageHeader.ProgressRing.IsActive = true;
+            }
         }
 
         public void HideProgressRing()
         {
-            ProgressRing.IsActive = false;
-            ProgressRing.Visibility = Visibility.Collapsed;
+            if (PageHeader != null)
+            {
+                PageHeader.ProgressRing.IsActive = false;
+                PageHeader.ProgressRing.Visibility = Visibility.Collapsed;
+            }
         }
 
         public void ShowProgressBar()
@@ -181,23 +246,27 @@ namespace WSATools.Pages
 
         public void ShowMessage(string message, string info, MessageColor color)
         {
-            Message.Text = message;
-            MessageInfo.Glyph = info;
-            MessageInfo.Foreground = color switch
+            if (PageHeader != null)
             {
-                MessageColor.Red => new SolidColorBrush(Color.FromArgb(255, 245, 88, 98)),
-                MessageColor.Blue => new SolidColorBrush(Color.FromArgb(255, 119, 220, 255)),
-                MessageColor.Green => new SolidColorBrush(Color.FromArgb(255, 155, 230, 155)),
-                MessageColor.Yellow => new SolidColorBrush(Color.FromArgb(255, 254, 228, 160)),
-                _ => new SolidColorBrush(Colors.Yellow),
-            };
-            MessageBar.Visibility = Visibility.Visible;
+                PageHeader.Message.Text = message;
+                PageHeader.MessageInfo.Glyph = info;
+                PageHeader.MessageInfo.Foreground = color switch
+                {
+                    MessageColor.Red => new SolidColorBrush(Color.FromArgb(255, 245, 88, 98)),
+                    MessageColor.Blue => new SolidColorBrush(Color.FromArgb(255, 119, 220, 255)),
+                    MessageColor.Green => new SolidColorBrush(Color.FromArgb(255, 155, 230, 155)),
+                    MessageColor.Yellow => new SolidColorBrush(Color.FromArgb(255, 254, 228, 160)),
+                    _ => new SolidColorBrush(Colors.Yellow),
+                };
+                PageHeader?.RectanglePointerEntered();
+            }
         }
 
         public void HideMessage()
         {
-            MessageBar.Visibility = Visibility.Collapsed;
+            PageHeader?.RectanglePointerExited();
         }
+
         #endregion
     }
 }

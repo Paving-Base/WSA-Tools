@@ -1,22 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows10.0.20348.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
 	<Authors>wherewhere</Authors>
-	<VersionPrefix>0.0.1</VersionPrefix>
-    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
-    <UseWindowsForms>True</UseWindowsForms>
+    <Copyright>Copyright © 2017 - 2021 Paving Base. All Rights Reserved</Copyright>
+    <Description>一个基于 Modern WPF 的 WSA 管理工具</Description>
+    <LangVersion>preview</LangVersion>
+    <OutputType>WinExe</OutputType>
     <PackageProjectUrl>https://github.com/Paving-Base/WSA-Tools</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Paving-Base/WSA-Tools</RepositoryUrl>
-    <Description>一个基于 Modern WPF 的 WSA 管理工具</Description>
-    <Copyright>Copyright © 2017 - 2021 Paving Base. All Rights Reserved</Copyright>
-    <PackageTags>WSA; Tools</PackageTags>
-    <PackageIcon>logo.png</PackageIcon>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <TargetFramework>net4.8</TargetFramework>
+    <UseWPF>true</UseWPF>
+	<VersionPrefix>0.0.1</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,16 +27,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AdvancedSharpAdbClient" Version="2.5.2" />
-    <PackageReference Include="FluentWPF" Version="0.9.0" />
-    <PackageReference Include="MicaWPF" Version="1.3.2" />
-    <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
-    <PackageReference Include="ModernWpfUI" Version="0.9.4" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
+    <PackageReference Include="Resource.Embedder" Version="2.2.0" PrivateAssets="all" />
+    <PackageReference Include="Costura.Fody" Version="5.7.0" PrivateAssets="all">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+    <PackageReference Include="System.Text.Json" Version="6.0.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\APPXManager\APPXManager\APPXManager.csproj" />
+    <ProjectReference Include="..\..\..\AdvancedSharpAdbClient\AdvancedSharpAdbClient\AdvancedSharpAdbClient.csproj" />
+    <ProjectReference Include="..\..\..\ModernWpf\ModernWpf.Controls\ModernWpf.Controls.csproj" />
     <ProjectReference Include="..\WSATools.Core\WSATools.Core.csproj" />
   </ItemGroup>
 

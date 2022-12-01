@@ -1,0 +1,66 @@
+name: build and publish
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+    paths:
+    - 'WSATools/**'
+
+jobs:
+  build-and-test:
+
+    name: build-and-publish
+    runs-on: windows-latest
+
+    env:
+      Solution_Name: WSATools/WSATools/WSATools.csproj
+      Project_Directory: WSATools/WSATools
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Clone ModernWpf
+      run: |
+        echo 'Cloning into sources folder at: ..\ModernWpf'
+        git clone https://github.com/wherewhere/ModernWpf.git --progress --branch master --single-branch --depth=1 ..\ModernWpf
+        exit
+
+    - name: Clone APPXManager
+      run: |
+        echo 'Cloning into sources folder at: ..\APPX-Manager'
+        git clone https://github.com/wherewhere/APPX-Manager.git --progress --branch master --single-branch --depth=1 ..\APPX-Manager
+        exit
+
+    - name: Clone SharpAdbClient
+      run: |
+        echo 'Cloning into sources folder at: ..\AdvancedSharpAdbClient'
+        git clone https://github.com/wherewhere/AdvancedSharpAdbClient.git --progress --branch main --single-branch --depth=1 ..\AdvancedSharpAdbClient
+        exit
+
+    # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    # Restore the application to populate the obj folder with RuntimeIdentifiers
+    - name: Restore the application
+      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+      env:
+        Configuration: Release
+
+    # Create the app package by building and packaging the Windows Application Packaging project
+    - name: Publish the app package
+      run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration /p:Platform=$env:Platforms
+      env:
+        Platforms: "Any CPU"
+        Configuration: Release
+
+    # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: Publish Package
+        path: WSATools/WSATools/bin/**

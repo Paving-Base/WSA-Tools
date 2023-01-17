@@ -38,7 +38,7 @@ jobs:
     - name: Clone SharpAdbClient
       run: |
         echo 'Cloning into sources folder at: ..\AdvancedSharpAdbClient'
-        git clone https://github.com/yungd1plomat/AdvancedSharpAdbClient.git --progress --branch dev --single-branch --depth=1 ..\AdvancedSharpAdbClient
+        git clone https://github.com/yungd1plomat/AdvancedSharpAdbClient.git --progress --branch main --single-branch --depth=1 ..\AdvancedSharpAdbClient
         exit
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
